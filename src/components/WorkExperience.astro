@@ -1,0 +1,66 @@
+---
+import Badge from "./Badge.astro";
+import Section from "./Section.astro";
+import type { ResumeData } from "@/data/resume";
+
+interface Props {
+  work: ResumeData["work"];
+}
+
+const { work } = Astro.props;
+---
+
+<Section title="Work Experience" id="work-experience">
+  <div class="space-y-4 print:space-y-0" role="feed" aria-labelledby="work-experience">
+    {work.map((item) => (
+      <article role="article">
+        <div class="resume-card py-1 print:py-0">
+          <div class="space-y-1.5 print:space-y-1">
+            <div class="flex items-center justify-between gap-x-2 text-base">
+              <h3 class="inline-flex items-center justify-center gap-x-1 font-semibold leading-none print:text-sm">
+                {item.link ? (
+                  <a class="hover:underline" href={item.link} target="_blank" rel="noopener noreferrer" aria-label={`${item.company} company website`}>
+                    {item.company}
+                  </a>
+                ) : (
+                  <span>{item.company}</span>
+                )}
+                {item.badges.length > 0 && (
+                  <ul class="hidden list-none gap-x-1 p-0 sm:inline-flex" aria-label="Technologies used">
+                    {item.badges.map((badge) => (
+                      <li><Badge variant="secondary" class="align-middle text-xs print:px-1 print:py-0.5 print:text-[8px] print:leading-tight">{badge}</Badge></li>
+                    ))}
+                  </ul>
+                )}
+              </h3>
+              <div class="text-sm tabular-nums text-gray-500" aria-label={`Employment period: ${item.start} to ${item.end ?? "Present"}`}>
+                {item.start} - {item.end ?? "Present"}
+              </div>
+            </div>
+
+            <h4 class="font-mono text-sm font-semibold leading-none print:text-[12px]">{item.title}</h4>
+          </div>
+
+          <div class="mt-2 text-pretty font-mono text-xs text-gray-900/80 print:mt-1 print:text-[10px]">
+            <p>{item.description.paragraph}</p>
+            {item.description.bullets.length > 0 && (
+              <ul class="list-disc pl-4 pt-6">
+                {item.description.bullets.map((bullet) => (
+                  <li class="pt-2 first:pt-0">{bullet}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {item.badges.length > 0 && (
+            <ul class="mt-2 flex list-none flex-wrap gap-1 p-0 sm:hidden" aria-label="Technologies used">
+              {item.badges.map((badge) => (
+                <li><Badge variant="secondary" class="align-middle text-xs print:px-1 print:py-0.5 print:text-[8px] print:leading-tight">{badge}</Badge></li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </article>
+    ))}
+  </div>
+</Section>

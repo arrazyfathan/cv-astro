@@ -1,0 +1,169 @@
+{
+  "name": "Ar Razy Fathan Rabbani",
+  "initials": "AFR",
+  "location": "Yogyakarta, Indonesia 🇮🇩",
+  "locationLink": "https://www.google.com/maps/place/Yogyakarta",
+  "about": "Mobile Engineer",
+  "description": "Ar Razy Fathan Rabbani - Mobile Engineer based in Yogyakarta, Indonesia 🇮🇩. With 3 years of experience in mobile app development, proficient in Kotlin/Java, and always open to learning new technologies. Skilled in both individual and team collaboration.",
+  "summary": "Mobile Engineer with 4 years of experience in developing mobile applications. Open to learn new things and up to any challenges. Able to work individually and team work. Proficient in various modern technologies of android development with Kotlin/Java and Multi-platform development with Kotlin Multiplatform Mobile (KMP) and Flutter.",
+  "avatarUrl": "/profile-image.jpg",
+  "personalWebsiteUrl": "",
+  "contact": {
+    "email": "hello@arrazyfathan.com",
+    "tel": null,
+    "social": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/arrazyfathan",
+        "icon": "github"
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/arrazyfathan/",
+        "icon": "linkedin"
+      }
+    ]
+  },
+  "education": [
+    {
+      "school": "Universitas Islam Indonesia",
+      "degree": "Bachelor's Degree in Computer Science",
+      "start": "2017",
+      "end": "2021 (GPA: 3.68)"
+    }
+  ],
+  "work": [
+    {
+      "company": "Gamatechno Indonesia",
+      "link": "https://www.gamatechno.com/",
+      "badges": ["Remote", "Android", "Kotlin", "Java", "Flutter"],
+      "title": "Mobile Engineer",
+      "start": "2022",
+      "end": null,
+      "description": {
+        "paragraph": "I work as an Android Engineer in the Digital Solutions division. I am involved in the development of various applications, which range from product-based to project-based. My primary focus is on developing project-based applications for government entities, with the aim of enhancing their productivity.",
+        "bullets": [
+          "Collaborated with a team of developers to design and implement Android applications, ensuring optimal performance and user experience",
+          "Developed and maintained code for new features, enhancements, and bug fixes in alignment with project requirements",
+          "Worked closely with UX/UI designers to implement visually appealing and intuitive interfaces",
+          "Stayed current with the latest Android development trends and technologies, integrating them into projects for continuous improvement."
+        ]
+      }
+    },
+    {
+      "company": "Freelance",
+      "link": "",
+      "badges": ["Remote", "Android", "Flutter"],
+      "title": "Mobile Developer",
+      "start": "2024",
+      "end": null,
+      "description": {
+        "paragraph": "As a freelance Android Developer, I work independently to design, develop, and maintain Android applications for various clients. I focus on building high-quality, user-friendly, and scalable mobile solutions tailored to clients needs.",
+        "bullets": [
+          "Designed and implemented Android applications, ensuring optimal performance and smooth user experience.",
+          "Developed and maintained features, enhancements, and bug fixes based on project requirements.",
+          "Worked closely with clients to understand their needs and translate them into functional mobile applications.",
+          "Stayed up to date with the latest Android development trends and best practices to deliver cutting-edge solutions."
+        ]
+      }
+    }
+  ],
+  "skills": {
+    "programmingLanguages": ["Kotlin", "Java", "Dart", "JavaScript", "TypeScript"],
+    "mobile": [
+      "Android Native",
+      "Jetpack Compose",
+      "KMP",
+      "Compose Multiplatform",
+      "Flutter",
+      "Android Jetpack",
+      "XML",
+      "CI/CD",
+      "MVVM",
+      "MVI",
+      "MVP",
+      "Clean Architecture",
+      "Coroutines"
+    ],
+    "toolbox": [
+      "Android Studio",
+      "Firebase",
+      "Gradle",
+      "Git",
+      "Android SDK",
+      "Jenkins",
+      "Gitlab CI/CD",
+      "VS Code",
+      "Intellij IDEA",
+      "Postman",
+      "Figma",
+      "Xcode",
+      "Zed"
+    ]
+  },
+  "projects": [
+    {
+      "title": "JakLingko App",
+      "techStack": ["Android Native", "Kotlin & Java", "Firebase", "NFC", "Room Database", "Google Maps SDK", "Coroutines", "MVVM"],
+      "description": "Jak Lingko is a public transport integration program designed to integrate payment and physical connection between transport modes in Jakarta.",
+      "link": {
+        "label": "JakLingko",
+        "href": "https://play.google.com/store/apps/details?id=com.jaklingkoindonesia.app&pcampaignid=web_share"
+      }
+    },
+    {
+      "title": "Kosmo Kominfo",
+      "techStack": ["Android Native", "Kotlin", "RxJava", "MVP", "Firebase", "MLKit"],
+      "description": "Kosmo Kominfo is a productivity companion app designed for the members of the Ministry of Communication and Informatics.",
+      "link": {
+        "label": "Kosmo Komdigi",
+        "href": "https://play.google.com/store/apps/details?id=com.kosmokominfo&pcampaignid=web_share"
+      }
+    },
+    {
+      "title": "Notes Agent ( Voice to Text )",
+      "techStack": ["Android Native", "Kotlin", "Firebase", "MVI"],
+      "description": "This app assists agents in creating notes using voice-to-text technology, allowing them to transcribe their thoughts either in real time or from recordings.",
+      "link": {
+        "label": "Notes Agent",
+        "href": ""
+      }
+    },
+    {
+      "title": "Lerun",
+      "techStack": ["Android Native", "Kotlin", "Firebase", "MVVM", "Room Database", "Coroutines", "Google Maps", "Dagger Hilt"],
+      "description": "Lerun is a running tracking application based on modern Android tech-stacks and MVVM architecture.",
+      "link": {
+        "label": "Lerun",
+        "href": "https://github.com/arrazyfathan/Lerun"
+      }
+    },
+    {
+      "title": "BeVoucher - Berau Coal HSE Automation",
+      "techStack": ["Android Native", "Java", "Firebase", "MVP", "Room Database"],
+      "description": "Implemented a voucher system that enhances user experience by offering additional benefits and rewards, driving user engagement and loyalty within the app.",
+      "link": {
+        "label": "BeVoucher",
+        "href": ""
+      }
+    },
+    {
+      "title": "Panic Button",
+      "techStack": ["Android Native", "Kotlin", "Firebase", "MVI", "Google Maps", "Coroutines"],
+      "description": "This app enables agents to quickly send emergency alerts or SOS messages, along with their current location, text, and video. It is designed to provide a swift and reliable way to communicate urgent situations, ensuring that help can be dispatched promptly.",
+      "link": {
+        "label": "Panic Button",
+        "href": ""
+      }
+    },
+    {
+      "title": "HiiGeek",
+      "techStack": ["Flutter", "Dart", "Firebase", "Bloc", "iOS", "Android"],
+      "description": "HiiGeek is the official app of GIK UGM, a Super Creative Hub that connects students, lecturers, industry professionals, artists, and public sectors in a vibrant ecosystem of innovation and creativity.",
+      "link": {
+        "label": "HiiGeek",
+        "href": "https://play.google.com/store/apps/details?id=id.hiigeek&pcampaignid=web_share"
+      }
+    }
+  ]
+}

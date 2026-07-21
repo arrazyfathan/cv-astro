@@ -1,0 +1,76 @@
+---
+import Icon from "./Icon.astro";
+import type { ResumeData, SocialIcon } from "@/data/resume";
+
+interface Props {
+  resume: ResumeData;
+}
+
+const { resume } = Astro.props;
+
+const socialIconName = (icon: SocialIcon) => icon;
+const websiteHost = resume.personalWebsiteUrl
+  ? new URL(resume.personalWebsiteUrl).hostname
+  : "";
+---
+
+<header class="flex items-center justify-between gap-6">
+  <div class="flex-1 space-y-1.5">
+    <h1 class="text-2xl font-bold" id="resume-name">{resume.name}</h1>
+    <p class="max-w-md text-pretty font-mono text-sm text-gray-900/80 print:text-[12px]" aria-labelledby="resume-name">
+      {resume.about}
+    </p>
+
+    <p class="max-w-md items-center text-pretty font-mono text-xs text-gray-950">
+      <a class="inline-flex gap-x-1.5 align-baseline leading-none hover:underline" href={resume.locationLink} target="_blank" rel="noopener noreferrer" aria-label={`Location: ${resume.location}`}>
+        <Icon name="globe" class="size-3" />
+        {resume.location}
+      </a>
+    </p>
+
+    <div class="flex gap-x-1 pt-1 font-mono text-sm text-gray-900/80 print:hidden" role="list" aria-label="Contact links">
+      {resume.personalWebsiteUrl && (
+        <a class="icon-button" href={resume.personalWebsiteUrl} aria-label="Personal website" target="_blank" rel="noopener noreferrer">
+          <Icon name="globe" />
+        </a>
+      )}
+      {resume.contact.email && (
+        <a class="icon-button" href={`mailto:${resume.contact.email}`} aria-label="Email">
+          <Icon name="mail" />
+        </a>
+      )}
+      {resume.contact.tel && (
+        <a class="icon-button" href={`tel:${resume.contact.tel}`} aria-label="Phone">
+          <Icon name="phone" />
+        </a>
+      )}
+      {resume.contact.social.map((social) => (
+        <a class="icon-button" href={social.url} aria-label={social.name} target="_blank" rel="noopener noreferrer">
+          <Icon name={socialIconName(social.icon)} />
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden gap-x-2 font-mono text-sm text-gray-900/80 print:flex print:text-[12px]" aria-label="Print contact information">
+      {resume.personalWebsiteUrl && (
+        <>
+          <a class="underline hover:text-gray-900/70" href={resume.personalWebsiteUrl}>{websiteHost}</a>
+          <span aria-hidden="true">/</span>
+        </>
+      )}
+      {resume.contact.email && (
+        <>
+          <a class="underline hover:text-gray-900/70" href={`mailto:${resume.contact.email}`}>{resume.contact.email}</a>
+          {resume.contact.tel && <span aria-hidden="true">/</span>}
+        </>
+      )}
+      {resume.contact.tel && (
+        <a class="underline hover:text-gray-900/70" href={`tel:${resume.contact.tel}`}>{resume.contact.tel}</a>
+      )}
+    </div>
+  </div>
+
+  <div class="size-28 shrink-0 overflow-hidden rounded-full border bg-neutral-100" aria-hidden="true">
+    <img class="size-full object-cover" src={resume.avatarUrl} alt={`${resume.name}'s profile picture`} loading="eager" />
+  </div>
+</header>

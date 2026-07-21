@@ -1,0 +1,33 @@
+---
+import Section from "./Section.astro";
+import type { ResumeData } from "@/data/resume";
+
+interface Props {
+  education: ResumeData["education"];
+}
+
+const { education } = Astro.props;
+---
+
+<Section title="Education" id="education-section">
+  <div class="space-y-4" role="feed" aria-labelledby="education-section">
+    {education.map((item) => {
+      const itemId = `education-${item.school.toLowerCase().replace(/\s+/g, "-")}`;
+      return (
+        <article role="article">
+          <div class="resume-card">
+            <div class="flex items-center justify-between gap-x-2 text-base">
+              <h3 class="font-semibold leading-none" id={itemId}>{item.school}</h3>
+              <div class="text-sm tabular-nums text-gray-500" aria-label={`Period: ${item.start} to ${item.end}`}>
+                {item.start} - {item.end}
+              </div>
+            </div>
+            <div class="mt-2 text-pretty font-mono text-sm text-gray-900/80 print:text-[12px]" aria-labelledby={itemId}>
+              {item.degree}
+            </div>
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</Section>

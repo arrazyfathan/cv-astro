@@ -1,0 +1,55 @@
+---
+import Badge from "./Badge.astro";
+import Section from "./Section.astro";
+import type { ResumeData } from "@/data/resume";
+
+interface Props {
+  projects: ResumeData["projects"];
+}
+
+const { projects } = Astro.props;
+
+const printableUrl = (url: string) =>
+  url.replace("https://", "").replace("http://", "").replace("www.", "").replace(/\/$/, "");
+---
+
+<Section title="Projects" id="side-projects" class="print-force-new-page scroll-mb-16 print:space-y-4 print:pt-12">
+  <div class="grid grid-cols-1 gap-4 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3" role="feed" aria-labelledby="side-projects">
+    {projects.map((project) => {
+      const href = project.link.href;
+      return (
+        <article class="h-full">
+          <div class="resume-card flex h-full flex-col overflow-hidden border p-3" role="article">
+            <div class="space-y-1">
+              <h3 class="text-base font-semibold leading-none">
+                {href ? (
+                  <>
+                    <a href={href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:underline" aria-label={`${project.title} project (opens in new tab)`}>
+                      {project.title}
+                      <span class="size-1 rounded-full bg-green-500" aria-label="Active project indicator"></span>
+                    </a>
+                    <div class="hidden font-mono text-xs underline print:block" aria-hidden="true">
+                      {printableUrl(href)}
+                    </div>
+                  </>
+                ) : (
+                  <span>{project.title}</span>
+                )}
+              </h3>
+              <p class="text-pretty font-mono text-xs text-gray-500 print:text-[10px]" aria-label="Project description">
+                {project.description}
+              </p>
+            </div>
+            {project.techStack.length > 0 && (
+              <ul class="mt-auto flex list-none flex-wrap gap-1 pt-2 p-0" aria-label="Technologies used">
+                {project.techStack.map((tag) => (
+                  <li><Badge variant="secondary" class="px-1 py-0 text-[10px] print:px-1 print:py-0.5 print:text-[8px] print:leading-tight">{tag}</Badge></li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </article>
+      );
+    })}
+  </div>
+</Section>

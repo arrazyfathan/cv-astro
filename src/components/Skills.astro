@@ -1,0 +1,32 @@
+---
+import Badge from "./Badge.astro";
+import Section from "./Section.astro";
+import type { ResumeData } from "@/data/resume";
+
+interface Props {
+  skills: ResumeData["skills"];
+}
+
+const { skills } = Astro.props;
+
+const groups = [
+  ["Programming Languages :", skills.programmingLanguages],
+  ["Mobile :", skills.mobile],
+  ["Tools :", skills.toolbox],
+] as const;
+---
+
+<Section title="Skills" id="skills-section">
+  <div class="space-y-4">
+    {groups.map(([label, values]) => (
+      <div>
+        <h3 class="mb-2 text-sm font-normal">{label}</h3>
+        <ul class="flex list-none flex-wrap gap-1 p-0" aria-label="List of skills">
+          {values.map((skill) => (
+            <li><Badge class="print:text-[10px]">{skill}</Badge></li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</Section>
