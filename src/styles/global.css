@@ -8,6 +8,7 @@
   --border: 220 13% 91%;
   --ring: 224 71% 4%;
   --radius: 0.5rem;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 * {
@@ -25,13 +26,7 @@ body {
   min-height: 100vh;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: var(--font-mono);
 }
 
 a {
@@ -40,15 +35,7 @@ a {
 }
 
 .font-mono {
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    "Courier New",
-    monospace;
+  font-family: var(--font-mono);
 }
 
 .text-pretty {
@@ -66,15 +53,7 @@ a {
   align-items: center;
   border: 1px solid transparent;
   border-radius: calc(var(--radius) - 2px);
-  font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Menlo,
-    Monaco,
-    Consolas,
-    "Liberation Mono",
-    "Courier New",
-    monospace;
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 600;
   line-height: 1rem;
