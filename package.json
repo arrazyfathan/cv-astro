@@ -6,11 +6,14 @@
   "scripts": {
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
-    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check"
+    "preview": "npm run build && wrangler dev",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "deploy": "npm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "12",
     "@astrojs/react": "^4.3.0",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.11.0",
@@ -20,5 +23,7 @@
     "tailwindcss": "^4.1.11",
     "typescript": "^5.6.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "wrangler": "^4.113.0"
+  }
 }
