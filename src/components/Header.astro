@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
+import profileImage from "../assets/profile-image.jpg";
 import type { ResumeData, SocialIcon } from "@/data/resume";
 
 interface Props {
@@ -78,7 +80,20 @@ const websiteHost = resume.personalWebsiteUrl
     </div>
   </div>
 
-  <div class="size-28 shrink-0 overflow-hidden rounded-full border bg-neutral-100" aria-hidden="true">
-    <img class="size-full object-cover" src={resume.avatarUrl} alt={`${resume.name}'s profile picture`} loading="eager" />
+  <div class="h-32 w-28 shrink-0 overflow-hidden rounded-lg border bg-neutral-100" aria-hidden="true">
+    <Image
+      class="size-full object-cover"
+      src={profileImage}
+      alt={`${resume.name}'s profile picture`}
+      width={112}
+      height={128}
+      format="webp"
+      fit="cover"
+      position="center"
+      widths={[112, 224]}
+      sizes="112px"
+      loading="eager"
+      decoding="async"
+    />
   </div>
 </header>
