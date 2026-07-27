@@ -28,28 +28,36 @@ const websiteHost = resume.personalWebsiteUrl
       </a>
     </p>
 
-    <div class="flex gap-x-1 pt-1 font-mono text-sm text-gray-900/80 print:hidden" role="list" aria-label="Contact links">
+    <ul class="flex list-none gap-x-1 pt-1 font-mono text-sm text-gray-900/80 print:hidden" aria-label="Contact links">
       {resume.personalWebsiteUrl && (
-        <a class="icon-button" href={resume.personalWebsiteUrl} aria-label="Personal website" target="_blank" rel="noopener noreferrer">
-          <Icon name="globe" />
-        </a>
+        <li>
+          <a class="icon-button" href={resume.personalWebsiteUrl} aria-label="Personal website" target="_blank" rel="noopener noreferrer">
+            <Icon name="globe" />
+          </a>
+        </li>
       )}
       {resume.contact.email && (
-        <a class="icon-button" href={`mailto:${resume.contact.email}`} aria-label="Email">
-          <Icon name="mail" />
-        </a>
+        <li>
+          <a class="icon-button" href={`mailto:${resume.contact.email}`} aria-label="Email">
+            <Icon name="mail" />
+          </a>
+        </li>
       )}
       {resume.contact.tel && (
-        <a class="icon-button" href={`tel:${resume.contact.tel}`} aria-label="Phone">
-          <Icon name="phone" />
-        </a>
+        <li>
+          <a class="icon-button" href={`tel:${resume.contact.tel}`} aria-label="Phone">
+            <Icon name="phone" />
+          </a>
+        </li>
       )}
       {resume.contact.social.map((social) => (
-        <a class="icon-button" href={social.url} aria-label={social.name} target="_blank" rel="noopener noreferrer">
-          <Icon name={socialIconName(social.icon)} />
-        </a>
+        <li>
+          <a class="icon-button" href={social.url} aria-label={social.name} target="_blank" rel="noopener noreferrer">
+            <Icon name={socialIconName(social.icon)} />
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
 
     <div class="hidden gap-x-2 font-mono text-sm text-gray-900/80 print:flex print:text-[12px]" aria-label="Print contact information">
       {resume.personalWebsiteUrl && (
