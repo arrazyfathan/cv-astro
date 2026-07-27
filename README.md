@@ -2,6 +2,8 @@
 
 A fast, static, print-friendly CV website built with Astro, TypeScript, React, and Tailwind CSS. The resume content is driven by a single JSON file, so the site can be updated without changing component markup.
 
+Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv).
+
 ## Features
 
 - Static Astro site with minimal client-side JavaScript.
