@@ -9,6 +9,8 @@ interface Props {
 }
 
 const { title, description, image = "/opengraph-image.jpg" } = Astro.props;
+const analyticsMeasurementId = "G-RJ4100DQ7M";
+const shouldLoadAnalytics = import.meta.env.PROD;
 ---
 
 <!doctype html>
@@ -33,13 +35,39 @@ const { title, description, image = "/opengraph-image.jpg" } = Astro.props;
     <link rel="apple-touch-icon" href="/apple-icon.png" />
     <link rel="preload" href={jetBrainsMonoLatinWoff2} as="font" type="font/woff2" crossorigin />
     <title>{title}</title>
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-RJ4100DQ7M"></script>
-    <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag("js", new Date());
-      gtag("config", "G-RJ4100DQ7M");
-    </script>
+    {shouldLoadAnalytics && (
+      <script is:inline define:vars={{ analyticsMeasurementId }}>
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function gtag(){window.dataLayer.push(arguments);}
+
+        const loadAnalytics = () => {
+          if (window.__googleAnalyticsLoaded) return;
+          window.__googleAnalyticsLoaded = true;
+          window.gtag("js", new Date());
+          window.gtag("config", analyticsMeasurementId);
+
+          const script = document.createElement("script");
+          script.async = true;
+          script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsMeasurementId}`;
+          document.head.appendChild(script);
+        };
+
+        const scheduleAnalytics = () => {
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(loadAnalytics, { timeout: 3000 });
+            return;
+          }
+
+          window.setTimeout(loadAnalytics, 1500);
+        };
+
+        if (document.readyState === "complete") {
+          scheduleAnalytics();
+        } else {
+          window.addEventListener("load", scheduleAnalytics, { once: true });
+        }
+      </script>
+    )}
   </head>
   <body>
     <slot />

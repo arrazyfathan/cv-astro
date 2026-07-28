@@ -1,6 +1,6 @@
 # Astro CV
 
-A fast, static, print-friendly CV website built with Astro, TypeScript, React, and Tailwind CSS. The resume content is driven by a single JSON file, so the site can be updated without changing component markup.
+A fast, static, print-friendly CV website built with Astro, TypeScript, and Tailwind CSS. The resume content is driven by a single JSON file, so the site can be updated without changing component markup.
 
 Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv).
 
@@ -11,7 +11,7 @@ Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv)
 - Resume content managed from `src/data/resume.json`.
 - JSON resume endpoint at `/resume.json`.
 - Responsive layout optimized for desktop, mobile, and print.
-- Command menu powered by React, available with `Cmd+J` on macOS or `Ctrl+J` elsewhere.
+- Lightweight command menu available with `Cmd+J` on macOS or `Ctrl+J` elsewhere.
 - Quick actions for printing and opening configured social links.
 - SEO, Open Graph, Twitter card, favicon, and analytics tags in the shared layout.
 - Ready for static hosting on Cloudflare Pages or any host that can serve the `dist` directory.
@@ -20,9 +20,7 @@ Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv)
 
 - [Astro](https://astro.build/) for static site generation.
 - [TypeScript](https://www.typescriptlang.org/) for typed data and components.
-- [React](https://react.dev/) for the interactive command menu.
 - [Tailwind CSS](https://tailwindcss.com/) through the Vite plugin.
-- [Lucide React](https://lucide.dev/) for command menu icons.
 
 ## Project Structure
 
@@ -37,8 +35,8 @@ Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv)
 |   `-- profile-image.jpg
 |-- src/
 |   |-- components/
-|   |   |-- react/CommandMenu.tsx
 |   |   |-- Badge.astro
+|   |   |-- CommandMenu.astro
 |   |   |-- Education.astro
 |   |   |-- Header.astro
 |   |   |-- Icon.astro
@@ -218,7 +216,7 @@ When replacing images, keep the same filenames or update the paths in `src/data/
 - Tailwind CSS is configured through `@tailwindcss/vite` in `astro.config.mjs`.
 - `BaseLayout.astro` owns document metadata, favicons, Open Graph tags, Twitter card tags, and Google Analytics.
 - Resume sections are split into small Astro components under `src/components/`.
-- The command menu is isolated in `src/components/react/CommandMenu.tsx` and loaded with Astro's `client:load` directive.
+- The command menu is isolated in `src/components/CommandMenu.astro` and uses a small browser script instead of a hydrated framework island.
 
 ## SEO and Analytics
 
@@ -229,7 +227,7 @@ The shared layout includes:
 - Open Graph profile metadata.
 - Twitter summary card metadata.
 - Bing site verification.
-- Google Analytics using measurement ID `G-RJ4100DQ7M`.
+- Google Analytics using measurement ID `G-RJ4100DQ7M`, loaded only in production after initial page load.
 
 For a fork or another person, update these values in `src/layouts/BaseLayout.astro` and keep `description` current in `src/data/resume.json`.
 
