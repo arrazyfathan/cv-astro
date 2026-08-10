@@ -103,6 +103,51 @@
   },
   "projects": [
     {
+      "title": "Obscurenv",
+      "techStack": ["Go", "PostgreSQL", "Cobra CLI", "AES-256-GCM", "Argon2id", "Docker Compose"],
+      "description": "A self-hosted, zero-knowledge encrypted .env storage service with a Go REST API and CLI that keeps encryption and decryption local.",
+      "link": {
+        "label": "Obscurenv",
+        "href": "https://github.com/arrazyfathan/obscurenv"
+      }
+    },
+    {
+      "title": "Obscurenv Web",
+      "techStack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Web Crypto", "Vitest"],
+      "description": "A self-hosted web dashboard for managing Obscurenv projects and encrypted .env files, with local browser decryption and passkey authentication.",
+      "link": {
+        "label": "Obscurenv Web",
+        "href": "https://github.com/arrazyfathan/obscurenv-web"
+      }
+    },
+    {
+      "title": "KBBI",
+      "techStack": ["Android", "Kotlin"],
+      "description": "An Android dictionary application for searching Indonesian words and exploring KBBI definitions.",
+      "link": {
+        "label": "KBBI",
+        "href": "https://github.com/arrazyfathan/kbbi"
+      }
+    },
+    {
+      "title": "KBBI Multiplatform",
+      "techStack": ["Kotlin Multiplatform", "Compose Multiplatform", "Material 3", "Koin", "Ktor", "Room"],
+      "description": "A shared Indonesian dictionary application for Android, iOS, web, and desktop, with cross-platform search, word details, bookmarks, and history.",
+      "link": {
+        "label": "KBBI Multiplatform",
+        "href": "https://github.com/arrazyfathan/kbbi-kmp"
+      }
+    },
+    {
+      "title": "Astro CV",
+      "techStack": ["Astro", "TypeScript", "Tailwind CSS", "Cloudflare Pages"],
+      "description": "A fast, print-friendly CV website built with Astro, with resume content driven by a typed JSON data model.",
+      "link": {
+        "label": "Astro CV",
+        "href": "https://github.com/arrazyfathan/cv-astro"
+      }
+    },
+    {
       "title": "JakLingko App",
       "techStack": ["Android Native", "Kotlin & Java", "Firebase", "NFC", "Room Database", "Google Maps SDK", "Coroutines", "MVVM"],
       "description": "Jak Lingko is a public transport integration program designed to integrate payment and physical connection between transport modes in Jakarta.",
