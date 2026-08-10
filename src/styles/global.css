@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@theme {
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 @font-face {
   font-family: "JetBrains Mono Variable";
   font-style: normal;
@@ -17,7 +21,8 @@
   --border: 220 13% 91%;
   --ring: 224 71% 4%;
   --radius: 0.5rem;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
 * {
@@ -36,15 +41,13 @@ body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-}
-
-.font-mono {
-  font-family: var(--font-mono);
 }
 
 .text-pretty {
@@ -69,8 +72,8 @@ a {
   padding: 0.125rem 0.5rem;
   white-space: nowrap;
   transition:
-    background-color 160ms ease,
-    color 160ms ease;
+    background-color 160ms var(--ease-out),
+    color 160ms var(--ease-out);
 }
 
 .resume-badge-default {
@@ -101,12 +104,150 @@ a {
   border-radius: calc(var(--radius) - 2px);
   background: hsl(var(--background));
   transition:
-    background-color 160ms ease,
-    border-color 160ms ease;
+    transform 160ms var(--ease-out),
+    background-color 160ms var(--ease-out),
+    border-color 160ms var(--ease-out);
 }
 
 .icon-button:hover {
   background: hsl(var(--muted));
+}
+
+.icon-button:active {
+  transform: scale(0.95);
+}
+
+/* Command menu */
+.cmd-fab {
+  transition:
+    transform 160ms var(--ease-out),
+    background-color 160ms var(--ease-out);
+}
+
+.cmd-fab:active {
+  transform: scale(0.94);
+}
+
+.cmd-overlay {
+  opacity: 0;
+  transition: opacity 150ms var(--ease-out);
+}
+
+.cmd-overlay.is-open {
+  opacity: 1;
+}
+
+.cmd-dialog {
+  opacity: 0;
+  transform: scale(0.98);
+  transform-origin: top center;
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out);
+}
+
+.cmd-overlay.is-open .cmd-dialog {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.cmd-overlay.closing {
+  transition-duration: 120ms;
+}
+
+.cmd-overlay.closing .cmd-dialog {
+  transition-duration: 150ms;
+}
+
+.cmd-item {
+  transition: background-color 140ms var(--ease-out);
+}
+
+.cmd-close {
+  transition: background-color 140ms var(--ease-out);
+}
+
+/* Project cards */
+.project-card {
+  transition:
+    transform 200ms var(--ease-out),
+    box-shadow 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px -16px hsl(var(--foreground) / 0.28);
+  }
+}
+
+/* First-paint reveal */
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: reveal-up 280ms var(--ease-out) both;
+}
+
+.reveal-stagger > * {
+  animation: reveal-up 280ms var(--ease-out) both;
+}
+
+.reveal-stagger > *:nth-child(1) {
+  animation-delay: 80ms;
+}
+
+.reveal-stagger > *:nth-child(2) {
+  animation-delay: 140ms;
+}
+
+.reveal-stagger > *:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.reveal-stagger > *:nth-child(4) {
+  animation-delay: 260ms;
+}
+
+.reveal-stagger > *:nth-child(5) {
+  animation-delay: 320ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    animation: none;
+  }
+
+  .cmd-overlay,
+  .cmd-dialog {
+    transition: opacity 120ms linear;
+  }
+
+  .cmd-dialog {
+    transform: none;
+  }
+
+  .icon-button:active,
+  .cmd-fab:active {
+    transform: none;
+  }
+
+  .project-card {
+    transition: none;
+  }
 }
 
 .print-force-new-page {
@@ -128,5 +269,10 @@ a {
 
   .print-flex {
     display: flex !important;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    animation: none;
   }
 }

@@ -24,7 +24,7 @@ const { links } = Astro.props;
 
   <button
     type="button"
-    class="fixed bottom-4 right-4 flex size-12 items-center justify-center rounded-full border bg-white shadow-2xl transition hover:bg-gray-100 xl:hidden print:hidden"
+    class="cmd-fab fixed bottom-4 right-4 flex size-12 items-center justify-center rounded-full border bg-white shadow-2xl hover:bg-gray-100 xl:hidden print:hidden"
     aria-label="Open command menu"
     aria-controls="command-menu-dialog"
     aria-expanded="false"
@@ -33,10 +33,10 @@ const { links } = Astro.props;
     <Icon name="command" class="size-6" />
   </button>
 
-  <div class="fixed inset-0 z-50 flex items-start justify-center bg-black/40 px-4 pt-[12vh] print:hidden" role="presentation" hidden data-command-overlay>
+  <div class="cmd-overlay fixed inset-0 z-50 flex items-start justify-center bg-black/40 px-4 pt-[12vh] print:hidden" role="presentation" hidden data-command-overlay>
     <div
       id="command-menu-dialog"
-      class="w-full max-w-lg overflow-hidden rounded-lg border bg-white shadow-2xl"
+      class="cmd-dialog w-full max-w-lg overflow-hidden rounded-lg border bg-white shadow-2xl"
       role="dialog"
       aria-modal="true"
       aria-label="Command menu"
@@ -50,27 +50,27 @@ const { links } = Astro.props;
           autocomplete="off"
           data-command-search
         />
-        <button type="button" class="rounded p-1 text-gray-500 hover:bg-gray-100" aria-label="Close command menu" data-command-close>
+        <button type="button" class="cmd-close rounded p-1 text-gray-500 hover:bg-gray-100" aria-label="Close command menu" data-command-close>
           <Icon name="x" class="size-4" />
         </button>
       </div>
 
       <div class="max-h-[320px] overflow-y-auto p-2">
-        <div class="px-2 py-1.5 text-xs font-medium text-gray-500">Actions</div>
-        <button type="button" class="flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-sm hover:bg-gray-100" data-command-print>
+        <div class="px-2 py-1.5 font-mono text-xs font-medium uppercase tracking-wider text-gray-500">Actions</div>
+        <button type="button" class="cmd-item flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-sm hover:bg-gray-100" data-command-print>
           <Icon name="printer" class="size-4" />
           <span>Print</span>
         </button>
 
         <div class="mt-2 border-t pt-2">
-          <div class="px-2 py-1.5 text-xs font-medium text-gray-500">Links</div>
+          <div class="px-2 py-1.5 font-mono text-xs font-medium uppercase tracking-wider text-gray-500">Links</div>
           <p class="px-2 py-6 text-center text-sm text-gray-500" hidden data-command-empty>No results found.</p>
           {links.map((link) => (
             <a
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-sm hover:bg-gray-100"
+              class="cmd-item flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-sm hover:bg-gray-100"
               data-command-link
               data-command-title={link.title.toLowerCase()}
             >
@@ -117,17 +117,33 @@ const { links } = Astro.props;
     };
 
     const openMenu = () => {
+      if (closeTimer !== null) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      overlay.classList.remove("closing");
       overlay.hidden = false;
       trigger.setAttribute("aria-expanded", "true");
       searchInput.value = "";
       filterLinks();
-      requestAnimationFrame(() => searchInput.focus());
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => overlay.classList.add("is-open"));
+        searchInput.focus();
+      });
     };
 
     const closeMenu = () => {
-      overlay.hidden = true;
+      overlay.classList.remove("is-open");
+      overlay.classList.add("closing");
       trigger.setAttribute("aria-expanded", "false");
+      closeTimer = window.setTimeout(() => {
+        overlay.hidden = true;
+        overlay.classList.remove("closing");
+        closeTimer = null;
+      }, 200);
     };
+
+    let closeTimer: number | null = null;
 
     trigger.addEventListener("click", () => {
       if (overlay.hidden) openMenu();
