@@ -167,16 +167,13 @@ img {
 }
 
 .hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
   align-items: center;
-  gap: clamp(3rem, 8vw, 8rem);
   min-height: min(48rem, calc(100svh - 5rem));
   padding-block: clamp(4rem, 9vw, 8.5rem);
 }
 
 .hero__copy {
-  max-width: 49rem;
+  max-width: 64rem;
 }
 
 .hero-kicker {
@@ -241,54 +238,6 @@ img {
 .button--on-dark {
   border-color: oklch(0.67 0.015 70);
   color: var(--canvas);
-}
-
-.hero__portrait {
-  width: min(100%, 27rem);
-  margin: 0;
-  justify-self: end;
-}
-
-.portrait-frame {
-  position: relative;
-  padding: clamp(0.75rem, 2vw, 1.2rem);
-  background: var(--signal);
-}
-
-.portrait-frame::before {
-  position: absolute;
-  top: -0.8rem;
-  right: -0.8rem;
-  width: 2.4rem;
-  height: 2.4rem;
-  border-top: 1px solid var(--ink);
-  border-right: 1px solid var(--ink);
-  content: "";
-}
-
-.portrait-frame img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  object-position: center 36%;
-  filter: saturate(0.84) contrast(1.02);
-}
-
-.hero__portrait figcaption {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.45rem 1rem;
-  margin-top: 0.8rem;
-  color: var(--slate);
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-variation-settings: "MONO" 1, "CASL" 0;
-}
-
-.hero__portrait figcaption a {
-  text-decoration: underline;
-  text-underline-offset: 0.22em;
 }
 
 .portfolio-section {
@@ -755,11 +704,6 @@ img {
 }
 
 @media (max-width: 900px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.55fr);
-    gap: 3rem;
-  }
-
   .featured-project,
   .featured-project--reverse {
     grid-template-columns: 8rem minmax(0, 1fr);
@@ -794,15 +738,8 @@ img {
   }
 
   .hero {
-    grid-template-columns: 1fr;
     min-height: 0;
-    gap: 3.5rem;
     padding-top: 4.5rem;
-  }
-
-  .hero__portrait {
-    width: min(82%, 24rem);
-    justify-self: center;
   }
 
   .featured-project,

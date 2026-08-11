@@ -1,10 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import FeaturedProject from "@/components/FeaturedProject.astro";
 import Icon from "@/components/Icon.astro";
 import { RESUME_DATA } from "@/data/resume";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import profileImage from "../assets/profile-image.jpg";
 
 const title = `${RESUME_DATA.name} | Mobile Engineer`;
 const featuredProjects = RESUME_DATA.projects.filter((project) => project.featured);
@@ -69,28 +67,6 @@ const capabilities = [
         </div>
       </div>
 
-      <figure class="hero__portrait">
-        <div class="portrait-frame">
-          <Image
-            src={profileImage}
-            alt={`Portrait of ${RESUME_DATA.name}`}
-            width={720}
-            height={720}
-            widths={[320, 480, 720]}
-            sizes="(max-width: 767px) 72vw, 32vw"
-            format="webp"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
-        </div>
-        <figcaption>
-          <span>Building mobile products since 2022</span>
-          <a href={RESUME_DATA.locationLink} target="_blank" rel="noopener noreferrer">
-            Based in Yogyakarta <span class="sr-only">(opens in a new tab)</span>
-          </a>
-        </figcaption>
-      </figure>
     </section>
 
     <section class="portfolio-section selected-work" id="selected-work" aria-labelledby="selected-work-title">
