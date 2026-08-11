@@ -18,8 +18,8 @@ const websiteHost = resume.personalWebsiteUrl
 
 <header class="reveal flex items-center justify-between gap-6">
   <div class="flex-1 space-y-1.5">
-    <h1 class="font-mono text-2xl font-bold tracking-tight" id="resume-name">{resume.name}</h1>
-    <p class="max-w-md text-pretty font-mono text-sm leading-relaxed text-gray-900/90 print:text-[12px]" aria-labelledby="resume-name">
+    <h1 class="text-2xl font-bold tracking-tight" id="resume-name">{resume.name}</h1>
+    <p class="max-w-md text-pretty text-sm leading-relaxed text-gray-900/90 print:text-[12px]" aria-labelledby="resume-name">
       {resume.about}
     </p>
 
@@ -80,7 +80,7 @@ const websiteHost = resume.personalWebsiteUrl
     </div>
   </div>
 
-  <div class="h-32 w-28 shrink-0 overflow-hidden rounded-lg border bg-neutral-100" aria-hidden="true">
+  <div class="h-32 w-28 shrink-0 overflow-hidden rounded-lg border bg-neutral-100">
     <Image
       class="size-full object-cover"
       src={profileImage}

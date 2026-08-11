@@ -4,8 +4,8 @@
   "location": "Yogyakarta, Indonesia 🇮🇩",
   "locationLink": "https://www.google.com/maps/place/Yogyakarta",
   "about": "Mobile Engineer",
-  "description": "Ar Razy Fathan Rabbani - Mobile Engineer based in Yogyakarta, Indonesia 🇮🇩. With 4 years of experience in mobile app development, proficient in Kotlin/Java, and always open to learning new technologies. Skilled in both individual and team collaboration.",
-  "summary": "Mobile Engineer with 4 years of experience in developing mobile applications. Open to learn new things and up to any challenges. Able to work individually and team work. Proficient in various modern technologies of android development with Kotlin/Java and Multi-platform development with Kotlin Multiplatform Mobile (KMP) and Flutter.",
+  "description": "Ar Razy Fathan Rabbani is a Mobile Engineer in Yogyakarta, Indonesia, building Android and cross-platform products with Kotlin, Compose, Kotlin Multiplatform, and Flutter since 2022.",
+  "summary": "I build dependable Android and cross-platform products for public services, connected communities, and everyday tools. Since 2022, I have worked across Kotlin, Compose, Kotlin Multiplatform, and Flutter, turning product requirements into maintainable mobile experiences with teams and independent clients.",
   "avatarUrl": "/profile-image.jpg",
   "personalWebsiteUrl": "",
   "contact": {
@@ -132,7 +132,13 @@
     {
       "title": "KBBI Multiplatform",
       "techStack": ["Kotlin Multiplatform", "Compose Multiplatform", "Material 3", "Koin", "Ktor", "Room"],
-      "description": "A shared Indonesian dictionary application for Android, iOS, web, and desktop, with cross-platform search, word details, bookmarks, and history.",
+      "description": "An Indonesian dictionary should feel consistent on every device without maintaining four separate product implementations.",
+      "featured": true,
+      "role": "Independent product engineer",
+      "highlights": [
+        "Designed shared search, word details, bookmarks, and history, then built the interface and data layers with Kotlin and Compose Multiplatform.",
+        "Created one reusable product foundation that keeps core behavior aligned across Android, iOS, web, and desktop."
+      ],
       "link": {
         "label": "KBBI Multiplatform",
         "href": "https://github.com/arrazyfathan/kbbi-kmp"
@@ -150,7 +156,13 @@
     {
       "title": "JakLingko App",
       "techStack": ["Android Native", "Kotlin & Java", "Firebase", "NFC", "Room Database", "Google Maps SDK", "Coroutines", "MVVM"],
-      "description": "Jak Lingko is a public transport integration program designed to integrate payment and physical connection between transport modes in Jakarta.",
+      "description": "Jakarta commuters need a reliable mobile touchpoint for a public transport network that connects multiple modes and payment journeys.",
+      "featured": true,
+      "role": "Android engineer at Gamatechno Indonesia",
+      "highlights": [
+        "Contributed production Android features across NFC, maps, local persistence, and asynchronous flows in an established Kotlin and Java codebase.",
+        "Helped support a public-facing mobility product where dependable device integration and clear user flows are essential."
+      ],
       "link": {
         "label": "JakLingko",
         "href": "https://play.google.com/store/apps/details?id=com.jaklingkoindonesia.app&pcampaignid=web_share"
@@ -204,7 +216,13 @@
     {
       "title": "HiiGeek",
       "techStack": ["Flutter", "Dart", "Firebase", "Bloc", "iOS", "Android"],
-      "description": "HiiGeek is the official app of GIK UGM, a Super Creative Hub that connects students, lecturers, industry professionals, artists, and public sectors in a vibrant ecosystem of innovation and creativity.",
+      "description": "GIK UGM needed one mobile experience for a creative ecosystem spanning students, lecturers, industry professionals, artists, and the public sector.",
+      "featured": true,
+      "role": "Flutter engineer",
+      "highlights": [
+        "Built cross-platform product flows for Android and iOS with Flutter, Bloc, and Firebase, translating a broad community brief into maintainable features.",
+        "Established a shared mobile experience that brings the hub's varied participants into one product surface."
+      ],
       "link": {
         "label": "HiiGeek",
         "href": "https://play.google.com/store/apps/details?id=id.hiigeek&pcampaignid=web_share"

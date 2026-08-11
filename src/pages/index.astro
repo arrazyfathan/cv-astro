@@ -1,46 +1,201 @@
 ---
-import CommandMenu from "@/components/CommandMenu.astro";
-import Education from "@/components/Education.astro";
-import Header from "@/components/Header.astro";
-import Projects from "@/components/Projects.astro";
-import Skills from "@/components/Skills.astro";
-import Summary from "@/components/Summary.astro";
-import WorkExperience from "@/components/WorkExperience.astro";
-import BaseLayout from "@/layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+import FeaturedProject from "@/components/FeaturedProject.astro";
+import Icon from "@/components/Icon.astro";
 import { RESUME_DATA } from "@/data/resume";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import profileImage from "../assets/profile-image.jpg";
 
-const title = `${RESUME_DATA.name} - Resume`;
-const commandLinks = [
-  ...(RESUME_DATA.personalWebsiteUrl
-    ? [{ url: RESUME_DATA.personalWebsiteUrl, title: "Personal Website" }]
-    : []),
-  ...RESUME_DATA.contact.social.map((social) => ({
-    url: social.url,
-    title: social.name,
-  })),
+const title = `${RESUME_DATA.name} | Mobile Engineer`;
+const featuredProjects = RESUME_DATA.projects.filter((project) => project.featured);
+const github = RESUME_DATA.contact.social.find((social) => social.icon === "github");
+const linkedin = RESUME_DATA.contact.social.find((social) => social.icon === "linkedin");
+const availableSkills = new Set([
+  ...RESUME_DATA.skills.programmingLanguages,
+  ...RESUME_DATA.skills.mobile,
+  ...RESUME_DATA.skills.toolbox,
+]);
+const selectSkills = (skills: string[]) => skills.filter((skill) => availableSkills.has(skill));
+const capabilities = [
+  {
+    title: "Native Android",
+    description: "Production Android work across modern Compose and established view-based codebases.",
+    skills: selectSkills(["Kotlin", "Java", "Android Native", "Jetpack Compose", "Android Jetpack", "Coroutines"]),
+  },
+  {
+    title: "Shared products",
+    description: "One product model carried thoughtfully across mobile and adjacent platforms.",
+    skills: selectSkills(["KMP", "Compose Multiplatform", "Flutter", "Dart"]),
+  },
+  {
+    title: "Architecture & delivery",
+    description: "Maintainable state, clear boundaries, local data, and repeatable delivery workflows.",
+    skills: selectSkills(["MVI", "MVVM", "Clean Architecture", "Room Database", "CI/CD", "Gradle", "Git"]),
+  },
 ];
 ---
 
-<BaseLayout title={title} description={RESUME_DATA.description}>
-  <main class="container relative mx-auto scroll-my-12 overflow-auto p-4 print:p-11 md:p-16" id="main-content">
-    <div class="sr-only">
-      <h1>{RESUME_DATA.name}'s Resume</h1>
-    </div>
+<BaseLayout title={title} description={RESUME_DATA.description} canonical="/">
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <section class="mx-auto w-full max-w-2xl space-y-8 bg-white print:space-y-4" aria-label="Resume Content">
-      <Header resume={RESUME_DATA} />
+  <header class="site-header" aria-label="Primary navigation">
+    <a class="wordmark" href="/">
+      <span aria-hidden="true">AFR</span>
+      <span>{RESUME_DATA.name}</span>
+    </a>
+    <nav>
+      <a href="#selected-work">Work</a>
+      <a href="#experience">Experience</a>
+      <a href="/resume/">Résumé</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-      <div class="reveal-stagger space-y-8 print:space-y-4">
-        <Summary summary={RESUME_DATA.summary} />
-        <WorkExperience work={RESUME_DATA.work} />
-        <Education education={RESUME_DATA.education} />
-        <Skills skills={RESUME_DATA.skills} />
-        <Projects projects={RESUME_DATA.projects} />
+  <main id="main-content">
+    <section class="hero portfolio-reveal" aria-labelledby="hero-title">
+      <div class="hero__copy">
+        <p class="hero-kicker">Mobile Engineer · Yogyakarta, Indonesia</p>
+        <h1 id="hero-title">Mobile products that hold up beyond the happy path.</h1>
+        <p class="hero-summary">{RESUME_DATA.summary}</p>
+        <div class="hero-actions" aria-label="Portfolio actions">
+          <a class="button button--primary" href="#selected-work">
+            View selected work
+            <span aria-hidden="true">↓</span>
+          </a>
+          <a class="button button--secondary" href="/ar-razy-fathan-rabbani-cv.pdf" download="ar-razy-fathan-rabbani-cv.pdf">
+            <Icon name="download" class="size-4" />
+            Download résumé
+          </a>
+        </div>
+      </div>
+
+      <figure class="hero__portrait">
+        <div class="portrait-frame">
+          <Image
+            src={profileImage}
+            alt={`Portrait of ${RESUME_DATA.name}`}
+            width={720}
+            height={720}
+            widths={[320, 480, 720]}
+            sizes="(max-width: 767px) 72vw, 32vw"
+            format="webp"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </div>
+        <figcaption>
+          <span>Building mobile products since 2022</span>
+          <a href={RESUME_DATA.locationLink} target="_blank" rel="noopener noreferrer">
+            Based in Yogyakarta <span class="sr-only">(opens in a new tab)</span>
+          </a>
+        </figcaption>
+      </figure>
+    </section>
+
+    <section class="portfolio-section selected-work" id="selected-work" aria-labelledby="selected-work-title">
+      <div class="section-heading">
+        <span aria-hidden="true">01</span>
+        <div>
+          <h2 id="selected-work-title">Selected work</h2>
+          <p>Three products, three different constraints, one focus on dependable mobile delivery.</p>
+        </div>
+      </div>
+      <div class="featured-projects">
+        {featuredProjects.map((project, index) => <FeaturedProject project={project} index={index} />)}
       </div>
     </section>
 
-    <nav class="print:hidden" aria-label="Quick navigation">
-      <CommandMenu links={commandLinks} />
-    </nav>
+    <section class="experience-band" id="experience" aria-labelledby="experience-title">
+      <div class="portfolio-section">
+        <div class="section-heading section-heading--light">
+          <span aria-hidden="true">02</span>
+          <div>
+            <h2 id="experience-title">Experience snapshot</h2>
+            <p>Product teams and independent engagements, from requirements through maintenance.</p>
+          </div>
+        </div>
+
+        <div class="experience-list">
+          {RESUME_DATA.work.map((item) => (
+            <article class="experience-row">
+              <div>
+                <p class="mono-label">{item.start} → {item.end ?? "Present"}</p>
+                <h3>{item.title}</h3>
+              </div>
+              <div>
+                {item.link ? (
+                  <a class="experience-company" href={item.link} target="_blank" rel="noopener noreferrer">
+                    {item.company}<span class="sr-only"> (opens in a new tab)</span>
+                  </a>
+                ) : (
+                  <p class="experience-company">{item.company}</p>
+                )}
+                <p>{item.description.paragraph}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <a class="text-link text-link--light" href="/resume/">Read the complete résumé <span aria-hidden="true">→</span></a>
+      </div>
+    </section>
+
+    <section class="portfolio-section capabilities" aria-labelledby="capabilities-title">
+      <div class="section-heading">
+        <span aria-hidden="true">03</span>
+        <div>
+          <h2 id="capabilities-title">Capabilities</h2>
+          <p>Broad enough to ship across platforms, focused enough to care about the seams.</p>
+        </div>
+      </div>
+
+      <div class="capability-list">
+        {capabilities.map((capability, index) => (
+          <article class="capability-row">
+            <span class="capability-index" aria-hidden="true">{String.fromCharCode(65 + index)}</span>
+            <div>
+              <h3>{capability.title}</h3>
+              <p>{capability.description}</p>
+            </div>
+            <ul class="tech-list" aria-label={`${capability.title} skills`}>
+              {capability.skills.map((skill) => <li>{skill}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="contact-band" id="contact" aria-labelledby="contact-title">
+      <div class="contact-inner">
+        <p class="mono-label">Let’s build something useful</p>
+        <h2 id="contact-title">Need a mobile engineer who can move between product detail and platform depth?</h2>
+        <div class="contact-actions">
+          {RESUME_DATA.contact.email && (
+            <a class="button button--primary" href={`mailto:${RESUME_DATA.contact.email}`}>
+              <Icon name="mail" class="size-4" />
+              {RESUME_DATA.contact.email}
+            </a>
+          )}
+          {github && (
+            <a class="button button--on-dark" href={github.url} target="_blank" rel="noopener noreferrer">
+              <Icon name="github" class="size-4" />
+              GitHub<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          )}
+          {linkedin && (
+            <a class="button button--on-dark" href={linkedin.url} target="_blank" rel="noopener noreferrer">
+              <Icon name="linkedin" class="size-4" />
+              LinkedIn<span class="sr-only"> (opens in a new tab)</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <p>© {new Date().getFullYear()} {RESUME_DATA.name}</p>
+    <a href="#main-content">Back to top <span aria-hidden="true">↑</span></a>
+  </footer>
 </BaseLayout>

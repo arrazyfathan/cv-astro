@@ -41,7 +41,7 @@ const { work } = Astro.props;
             <h4 class="font-mono text-sm font-semibold leading-none print:text-[12px]">{item.title}</h4>
           </div>
 
-          <div class="mt-2 text-pretty font-mono text-xs leading-relaxed text-gray-900/90 print:mt-1 print:text-[10px]">
+          <div class="mt-2 text-pretty text-xs leading-relaxed text-gray-900/90 print:mt-1 print:text-[10px]">
             <p>{item.description.paragraph}</p>
             {item.description.bullets.length > 0 && (
               <ul class="list-disc space-y-1.5 pl-4 pt-4">

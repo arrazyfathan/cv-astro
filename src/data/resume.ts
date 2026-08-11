@@ -48,6 +48,13 @@ export interface ResumeData {
     title: string;
     techStack: string[];
     description: string;
+    featured?: boolean;
+    role?: string;
+    highlights?: string[];
+    image?: {
+      src: string;
+      alt: string;
+    };
     link: {
       label: string;
       href: string;

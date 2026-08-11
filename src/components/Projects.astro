@@ -13,8 +13,8 @@ const printableUrl = (url: string) =>
   url.replace("https://", "").replace("http://", "").replace("www.", "").replace(/\/$/, "");
 ---
 
-<Section title="Projects" id="side-projects" class="print-force-new-page scroll-mb-16 print:space-y-4 print:pt-12">
-  <div class="grid grid-cols-1 gap-4 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3" role="feed" aria-labelledby="side-projects">
+<Section title="Projects" id="side-projects" class="print-projects scroll-mb-16 print:space-y-4">
+  <div class="projects-feed grid grid-cols-1 gap-4 print:gap-2 md:grid-cols-2 lg:grid-cols-3" role="feed" aria-labelledby="side-projects">
     {projects.map((project) => {
       const href = project.link.href;
       return (
@@ -28,7 +28,7 @@ const printableUrl = (url: string) =>
                       {project.title}
                       <span class="size-1 rounded-full bg-green-500" aria-label="Active project indicator"></span>
                     </a>
-                    <div class="hidden font-mono text-xs underline print:block" aria-hidden="true">
+                    <div class="project-print-url hidden font-mono text-xs underline print:block" aria-hidden="true">
                       {printableUrl(href)}
                     </div>
                   </>
@@ -36,7 +36,7 @@ const printableUrl = (url: string) =>
                   <span>{project.title}</span>
                 )}
               </h3>
-              <p class="text-pretty font-mono text-xs leading-relaxed text-gray-600 print:text-[10px]" aria-label="Project description">
+              <p class="text-pretty text-xs leading-relaxed text-gray-600 print:text-[10px]" aria-label="Project description">
                 {project.description}
               </p>
             </div>

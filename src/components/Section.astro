@@ -9,6 +9,6 @@ const { title, id, class: className = "" } = Astro.props;
 ---
 
 <section class={`space-y-3 ${className}`} aria-labelledby={id}>
-  <h2 class="font-mono text-xl font-bold tracking-tight text-balance" id={id}>{title}</h2>
+  <h2 class="text-xl font-bold tracking-tight text-balance" id={id}>{title}</h2>
   <slot />
 </section>

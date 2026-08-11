@@ -1,19 +1,20 @@
-# Astro CV
+# Astro Portfolio and Résumé
 
-A fast, static, print-friendly CV website built with Astro, TypeScript, and Tailwind CSS. The resume content is driven by a single JSON file, so the site can be updated without changing component markup.
+A fast, static portfolio and print-friendly résumé built with Astro, TypeScript, and Tailwind CSS. A single typed JSON file drives the portfolio case studies, web résumé, JSON endpoint, and generated PDF.
 
 Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv).
 
 ## Features
 
-- Static Astro site with minimal client-side JavaScript.
+- Portfolio-first homepage with no hydrated UI framework.
+- Dedicated printable résumé at `/resume/`.
 - TypeScript resume data contract in `src/data/resume.ts`.
 - Resume content managed from `src/data/resume.json`.
 - JSON resume endpoint at `/resume.json`.
-- Responsive layout optimized for desktop, mobile, and print.
-- Lightweight command menu available with `Cmd+J` on macOS or `Ctrl+J` elsewhere.
-- Quick actions for downloading a generated PDF and opening configured social links.
-- SEO, Open Graph, Twitter card, favicon, and analytics tags in the shared layout.
+- Featured case studies with optional project imagery.
+- Responsive layouts optimized for mobile, desktop, and print.
+- Visible résumé, email, GitHub, and LinkedIn actions.
+- Canonical metadata, absolute social images, sitemap, robots rules, and lightweight analytics.
 - Ready for static hosting on Cloudflare Pages or any host that can serve the `dist` directory.
 
 ## Tech Stack
@@ -21,6 +22,7 @@ Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv)
 - [Astro](https://astro.build/) for static site generation.
 - [TypeScript](https://www.typescriptlang.org/) for typed data and components.
 - [Tailwind CSS](https://tailwindcss.com/) through the Vite plugin.
+- [Recursive](https://www.recursive.design/) for proportional and mono typography axes.
 
 ## Project Structure
 
@@ -36,8 +38,8 @@ Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv)
 |-- src/
 |   |-- components/
 |   |   |-- Badge.astro
-|   |   |-- CommandMenu.astro
 |   |   |-- Education.astro
+|   |   |-- FeaturedProject.astro
 |   |   |-- Header.astro
 |   |   |-- Icon.astro
 |   |   |-- Projects.astro
@@ -51,6 +53,8 @@ Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv)
 |   |-- layouts/BaseLayout.astro
 |   |-- pages/
 |   |   |-- index.astro
+|   |   |-- resume/
+|   |   |   `-- index.astro
 |   |   `-- resume.json.ts
 |   `-- styles/global.css
 |-- astro.config.mjs
@@ -129,12 +133,12 @@ Most content changes should be made in `src/data/resume.json`. The JSON is impor
 | `description` | SEO/Open Graph description. |
 | `summary` | Main resume summary paragraph. |
 | `avatarUrl` | Public path for the profile image, such as `/profile-image.jpg`. |
-| `personalWebsiteUrl` | Optional website URL included in the command menu when set. |
+| `personalWebsiteUrl` | Optional personal website URL. |
 | `contact` | Email, phone, and social links. |
 | `education` | Education entries. |
 | `work` | Work experience entries. |
 | `skills` | Grouped skill lists. |
-| `projects` | Project cards shown near the end of the resume. |
+| `projects` | Project entries used by the portfolio and résumé. |
 
 ### Contact Links
 
@@ -179,6 +183,13 @@ Each project supports:
   "title": "Project name",
   "techStack": ["Android Native", "Kotlin"],
   "description": "Short project description.",
+  "featured": true,
+  "role": "Your role on the project",
+  "highlights": ["Contribution", "Qualitative outcome"],
+  "image": {
+    "src": "/projects/project-slug/screenshot.webp",
+    "alt": "Description of the project screen"
+  },
   "link": {
     "label": "Project link label",
     "href": "https://example.com"
@@ -186,7 +197,7 @@ Each project supports:
 }
 ```
 
-If a project is private, leave `href` empty or add the best public reference available.
+`featured`, `role`, `highlights`, and `image` are optional. If a project is private, leave `href` empty or add the best public reference available. Store screenshots under `public/projects/<slug>/`; no empty media placeholder is rendered when `image` is omitted.
 
 ## Assets
 
@@ -207,26 +218,27 @@ When replacing images, keep the same filenames or update the paths in `src/data/
 
 | Route | Source | Description |
 | --- | --- | --- |
-| `/` | `src/pages/index.astro` | Main resume page. |
+| `/` | `src/pages/index.astro` | Portfolio homepage. |
+| `/resume/` | `src/pages/resume/index.astro` | Complete web résumé. |
 | `/resume.json` | `src/pages/resume.json.ts` | JSON representation of the resume data. |
 
 ## Layout and Styling
 
-- Global styles are defined in `src/styles/global.css`.
+- Global portfolio and résumé styles are defined in `src/styles/global.css`.
 - Tailwind CSS is configured through `@tailwindcss/vite` in `astro.config.mjs`.
 - `BaseLayout.astro` owns document metadata, favicons, Open Graph tags, Twitter card tags, and Google Analytics.
 - Resume sections are split into small Astro components under `src/components/`.
-- The command menu is isolated in `src/components/CommandMenu.astro` and uses a small browser script instead of a hydrated framework island.
 
 ## SEO and Analytics
 
 The shared layout includes:
 
-- Standard page title and meta description.
+- Page-specific canonical URLs, titles, and descriptions.
 - Search keywords.
-- Open Graph profile metadata.
+- Absolute Open Graph and Twitter image URLs.
 - Twitter summary card metadata.
 - Bing site verification.
+- Generated sitemap and `robots.txt` integration.
 - Google Analytics using measurement ID `G-RJ4100DQ7M`, loaded only in production after initial page load.
 
 For a fork or another person, update these values in `src/layouts/BaseLayout.astro` and keep `description` current in `src/data/resume.json`.
@@ -236,9 +248,9 @@ For a fork or another person, update these values in `src/layouts/BaseLayout.ast
 The resume has a dedicated PDF export generated from `src/data/resume.json`:
 
 - Print-specific Tailwind classes reduce spacing.
-- The command menu and shortcut hint are hidden during print.
+- The résumé toolbar is hidden during print.
 - `scripts/generate-resume-pdf.mjs` creates `public/ar-razy-fathan-rabbani-cv.pdf` during `npm run dev` and `npm run build`.
-- The command menu includes a direct `Download PDF` action and does not open the browser print dialog.
+- The homepage and résumé include direct generated-PDF downloads.
 
 Use Poppler and `pypdf` to render and inspect the generated pages after large content updates.
 

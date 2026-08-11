@@ -1,0 +1,63 @@
+---
+import type { ResumeData } from "@/data/resume";
+import Icon from "./Icon.astro";
+
+interface Props {
+  project: ResumeData["projects"][number];
+  index: number;
+}
+
+const { project, index } = Astro.props;
+const projectNumber = String(index + 1).padStart(2, "0");
+const [contribution, outcome] = project.highlights ?? [];
+---
+
+<article class:list={["featured-project", { "featured-project--reverse": index % 2 === 1, "featured-project--with-image": project.image }]} aria-labelledby={`featured-project-${index}`}>
+  <div class="featured-project__meta">
+    <span class="project-number" aria-hidden="true">{projectNumber}</span>
+    {project.role && <p class="mono-label">{project.role}</p>}
+  </div>
+
+  {project.image && (
+    <figure class="featured-project__media">
+      <img src={project.image.src} alt={project.image.alt} loading="lazy" decoding="async" />
+    </figure>
+  )}
+
+  <div class="featured-project__body">
+    <h3 id={`featured-project-${index}`}>{project.title}</h3>
+
+    <dl class="case-study-details">
+      <div>
+        <dt>Problem</dt>
+        <dd>{project.description}</dd>
+      </div>
+      {contribution && (
+        <div>
+          <dt>Contribution</dt>
+          <dd>{contribution}</dd>
+        </div>
+      )}
+      {outcome && (
+        <div>
+          <dt>Outcome</dt>
+          <dd>{outcome}</dd>
+        </div>
+      )}
+    </dl>
+
+    <div class="project-foot">
+      <ul class="tech-list" aria-label={`${project.title} technologies`}>
+        {project.techStack.map((technology) => <li>{technology}</li>)}
+      </ul>
+
+      {project.link.href && (
+        <a class="text-link" href={project.link.href} target="_blank" rel="noopener noreferrer">
+          {project.link.label}
+          <Icon name="external-link" class="size-4" />
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
+      )}
+    </div>
+  </div>
+</article>
