@@ -3,6 +3,7 @@ dist/
 .astro/
 .DS_Store
 *.tsbuildinfo
+public/ar-razy-fathan-rabbani-cv.pdf
 
 # wrangler files
 .wrangler

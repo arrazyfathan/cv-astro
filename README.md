@@ -12,7 +12,7 @@ Inspired by [Bartosz Jarocki's CV project](https://github.com/BartoszJarocki/cv)
 - JSON resume endpoint at `/resume.json`.
 - Responsive layout optimized for desktop, mobile, and print.
 - Lightweight command menu available with `Cmd+J` on macOS or `Ctrl+J` elsewhere.
-- Quick actions for printing and opening configured social links.
+- Quick actions for downloading a generated PDF and opening configured social links.
 - SEO, Open Graph, Twitter card, favicon, and analytics tags in the shared layout.
 - Ready for static hosting on Cloudflare Pages or any host that can serve the `dist` directory.
 
@@ -233,13 +233,14 @@ For a fork or another person, update these values in `src/layouts/BaseLayout.ast
 
 ## Print Support
 
-The resume is designed to print cleanly:
+The resume has a dedicated PDF export generated from `src/data/resume.json`:
 
 - Print-specific Tailwind classes reduce spacing.
 - The command menu and shortcut hint are hidden during print.
-- The command menu includes a `Print` action that calls `window.print()`.
+- `scripts/generate-resume-pdf.mjs` creates `public/ar-razy-fathan-rabbani-cv.pdf` during `npm run dev` and `npm run build`.
+- The command menu includes a direct `Download PDF` action and does not open the browser print dialog.
 
-Use the browser print preview to verify page breaks after large content updates.
+Use Poppler and `pypdf` to render and inspect the generated pages after large content updates.
 
 ## Deployment
 
