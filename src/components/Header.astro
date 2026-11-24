@@ -2,98 +2,211 @@
 import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import profileImage from "../assets/profile-image.jpg";
-import type { ResumeData, SocialIcon } from "@/data/resume";
+import type { ResumeData } from "@/data/resume";
 
 interface Props {
   resume: ResumeData;
 }
 
 const { resume } = Astro.props;
-
-const socialIconName = (icon: SocialIcon) => icon;
-const websiteHost = resume.personalWebsiteUrl
-  ? new URL(resume.personalWebsiteUrl).hostname
-  : "";
 ---
 
-<header class="reveal flex items-center justify-between gap-6">
-  <div class="flex-1 space-y-1.5">
-    <h1 class="font-mono text-2xl font-bold tracking-tight" id="resume-name">{resume.name}</h1>
-    <p class="max-w-md text-pretty font-mono text-sm leading-relaxed text-gray-900/90 print:text-[12px]" aria-labelledby="resume-name">
-      {resume.about}
-    </p>
+<header class="cv-stagger space-y-5 print:space-y-3">
+  <div class="flex items-start justify-between gap-6">
+    <div class="min-w-0 flex-1 space-y-2.5 print:space-y-1.5">
+      <h1
+        class="font-display text-[30px] font-bold leading-[1.08] tracking-[-0.03em] text-[var(--ink)] sm:text-[36px] print:text-[26px]"
+        id="resume-name"
+      >
+        {resume.name}
+      </h1>
 
-    <p class="max-w-md items-center text-pretty font-mono text-xs text-gray-950">
-      <a class="inline-flex gap-x-1.5 align-baseline leading-none underline-offset-4 hover:underline" href={resume.locationLink} target="_blank" rel="noopener noreferrer" aria-label={`Location: ${resume.location}`}>
-        <Icon name="globe" class="size-3" />
-        {resume.location}
-      </a>
-    </p>
+      <p
+        class="text-[15.5px] font-medium text-[var(--ink-2)] print:text-[13px]"
+        aria-labelledby="resume-name"
+      >
+        {resume.about}
+      </p>
 
-    <ul class="flex list-none gap-x-1 pt-1 font-mono text-sm text-gray-900/80 print:hidden" aria-label="Contact links">
-      {resume.personalWebsiteUrl && (
-        <li>
-          <a class="icon-button" href={resume.personalWebsiteUrl} aria-label="Personal website" target="_blank" rel="noopener noreferrer">
-            <Icon name="globe" />
-          </a>
-        </li>
-      )}
-      {resume.contact.email && (
-        <li>
-          <a class="icon-button" href={`mailto:${resume.contact.email}`} aria-label="Email">
-            <Icon name="mail" />
-          </a>
-        </li>
-      )}
-      {resume.contact.tel && (
-        <li>
-          <a class="icon-button" href={`tel:${resume.contact.tel}`} aria-label="Phone">
-            <Icon name="phone" />
-          </a>
-        </li>
-      )}
-      {resume.contact.social.map((social) => (
-        <li>
-          <a class="icon-button" href={social.url} aria-label={social.name} target="_blank" rel="noopener noreferrer">
-            <Icon name={socialIconName(social.icon)} />
-          </a>
-        </li>
-      ))}
-    </ul>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5 pt-0.5 text-[13px] text-[var(--muted)] print:hidden">
+        <a
+          class="inline-flex items-center gap-1.5 transition-colors hover:text-[var(--ink)]"
+          href={resume.locationLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Location: ${resume.location}`}
+        >
+          <Icon name="map-pin" class="size-3.5 shrink-0" />
+          <span>{resume.location}</span>
+        </a>
 
-    <div class="hidden gap-x-2 font-mono text-sm text-gray-900/80 print:flex print:text-[12px]" aria-label="Print contact information">
-      {resume.personalWebsiteUrl && (
-        <>
-          <a class="underline hover:text-gray-900/70" href={resume.personalWebsiteUrl}>{websiteHost}</a>
-          <span aria-hidden="true">/</span>
-        </>
-      )}
-      {resume.contact.email && (
-        <>
-          <a class="underline hover:text-gray-900/70" href={`mailto:${resume.contact.email}`}>{resume.contact.email}</a>
-          {resume.contact.tel && <span aria-hidden="true">/</span>}
-        </>
-      )}
-      {resume.contact.tel && (
-        <a class="underline hover:text-gray-900/70" href={`tel:${resume.contact.tel}`}>{resume.contact.tel}</a>
-      )}
+        <span class="inline-flex items-start gap-2 text-[var(--muted)]">
+          <span class="cv-status-dot mt-[6.5px]" aria-hidden="true"></span>
+          <span>{resume.availability}</span>
+        </span>
+      </div>
+    </div>
+
+    <div
+      class="size-20 shrink-0 overflow-hidden rounded-2xl border border-[var(--line-strong)] bg-[var(--sunken)] sm:size-24 print:size-[72px]"
+      aria-hidden="true"
+    >
+      <Image
+        class="size-full object-cover"
+        src={profileImage}
+        alt={`${resume.name}'s portrait`}
+        width={96}
+        height={96}
+        format="webp"
+        fit="cover"
+        position="center"
+        widths={[96, 192]}
+        sizes="96px"
+        loading="eager"
+        decoding="async"
+      />
     </div>
   </div>
 
-  <div class="h-32 w-28 shrink-0 overflow-hidden rounded-lg border bg-neutral-100" aria-hidden="true">
-    <Image
-      class="size-full object-cover"
-      src={profileImage}
-      alt={`${resume.name}'s profile picture`}
-      width={112}
-      height={128}
-      format="webp"
-      fit="cover"
-      position="center"
-      widths={[112, 224]}
-      sizes="112px"
-      loading="eager"
-      decoding="async"
-    />
+  <!-- Screen Contact & Social Links — Minimal Editorial Row -->
+  <div
+    class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-0.5 text-[13.5px] print:hidden"
+    role="list"
+    aria-label="Contact and social links"
+  >
+    {resume.contact.email && (
+      <div role="listitem" class="inline-flex items-center gap-1.5">
+        <a
+          href={`mailto:${resume.contact.email}`}
+          class="group inline-flex items-center gap-1.5 text-[var(--ink)] transition-colors hover:text-[var(--accent)]"
+        >
+          <Icon
+            name="mail"
+            class="size-3.5 text-[var(--muted)] transition-colors group-hover:text-[var(--accent)]"
+          />
+          <span class="font-mono text-[13px] underline decoration-[var(--line-strong)] underline-offset-[5px] transition-colors group-hover:decoration-[var(--accent)]">
+            {resume.contact.email}
+          </span>
+        </a>
+        <button
+          type="button"
+          data-copy-email={resume.contact.email}
+          class="cv-press inline-flex cursor-pointer items-center gap-1 rounded px-1 py-0.5 font-mono text-[11.5px] text-[var(--muted)] hover:text-[var(--ink)]"
+          aria-label="Copy email address"
+          title="Copy email"
+        >
+          <span data-copy-idle class="inline-flex items-center">
+            <Icon name="copy" class="size-3" />
+          </span>
+          <span data-copy-done class="hidden items-center gap-1 text-[var(--ok)]">
+            <Icon name="check" class="size-3" />
+            <span>Copied</span>
+          </span>
+        </button>
+      </div>
+    )}
+
+    {resume.personalWebsiteUrl && (
+      <a
+        role="listitem"
+        href={resume.personalWebsiteUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex items-center gap-1.5 text-[var(--ink-2)] transition-colors hover:text-[var(--ink)]"
+      >
+        <Icon
+          name="globe"
+          class="size-3.5 text-[var(--muted)] transition-colors group-hover:text-[var(--ink)]"
+        />
+        <span class="underline decoration-[var(--line-strong)] underline-offset-[5px] transition-colors group-hover:decoration-[var(--ink)]">
+          Website
+        </span>
+        <Icon
+          name="arrow-up-right"
+          class="size-3.5 text-[var(--quiet)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--ink)]"
+        />
+      </a>
+    )}
+
+    {resume.contact.social.map((social) => (
+      <a
+        role="listitem"
+        href={social.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="group inline-flex items-center gap-1.5 text-[var(--ink-2)] transition-colors hover:text-[var(--ink)]"
+        aria-label={`${social.name}: ${social.handle}`}
+      >
+        <Icon
+          name={social.icon}
+          class="size-3.5 text-[var(--muted)] transition-colors group-hover:text-[var(--ink)]"
+        />
+        <span class="underline decoration-[var(--line-strong)] underline-offset-[5px] transition-colors group-hover:decoration-[var(--ink)]">
+          {social.name}
+        </span>
+        <Icon
+          name="arrow-up-right"
+          class="size-3.5 text-[var(--quiet)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--ink)]"
+        />
+      </a>
+    ))}
+  </div>
+
+  <!-- Print-Only Compact Contact Line -->
+  <div
+    class="hidden flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[10.5px] text-[var(--ink-2)] print:flex"
+    aria-label="Print contact information"
+  >
+    <span>{resume.location}</span>
+    {resume.contact.email && (
+      <>
+        <span aria-hidden="true">·</span>
+        <a href={`mailto:${resume.contact.email}`}>{resume.contact.email}</a>
+      </>
+    )}
+    {resume.personalWebsiteUrl && (
+      <>
+        <span aria-hidden="true">·</span>
+        <a href={resume.personalWebsiteUrl}>arrazyfathan.com</a>
+      </>
+    )}
+    <span aria-hidden="true">·</span>
+    <a href="https://github.com/arrazyfathan">github.com/arrazyfathan</a>
+    <span aria-hidden="true">·</span>
+    <a href="https://www.linkedin.com/in/arrazyfathan/">linkedin.com/in/arrazyfathan</a>
   </div>
 </header>
+
+<script>
+  const copyBtn = document.querySelector<HTMLButtonElement>("[data-copy-email]");
+  if (copyBtn) {
+    const email = copyBtn.dataset.copyEmail ?? "";
+    const idleEl = copyBtn.querySelector<HTMLElement>("[data-copy-idle]");
+    const doneEl = copyBtn.querySelector<HTMLElement>("[data-copy-done]");
+    let timer: number | null = null;
+
+    copyBtn.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+        if (idleEl && doneEl) {
+          idleEl.classList.add("hidden");
+          idleEl.classList.remove("inline-flex");
+          doneEl.classList.remove("hidden");
+          doneEl.classList.add("inline-flex");
+        }
+        if (timer) window.clearTimeout(timer);
+        timer = window.setTimeout(() => {
+          if (idleEl && doneEl) {
+            doneEl.classList.add("hidden");
+            doneEl.classList.remove("inline-flex");
+            idleEl.classList.remove("hidden");
+            idleEl.classList.add("inline-flex");
+          }
+          timer = null;
+        }, 1800);
+      } catch {
+        window.location.href = `mailto:${email}`;
+      }
+    });
+  }
+</script>

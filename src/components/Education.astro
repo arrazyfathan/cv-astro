@@ -9,25 +9,30 @@ interface Props {
 const { education } = Astro.props;
 ---
 
-<Section title="Education" id="education-section">
-  <div class="space-y-4" role="feed" aria-labelledby="education-section">
-    {education.map((item) => {
-      const itemId = `education-${item.school.toLowerCase().replace(/\s+/g, "-")}`;
-      return (
-        <article role="article">
-          <div class="resume-card">
-            <div class="flex items-center justify-between gap-x-2 text-base">
-              <h3 class="font-semibold leading-none tracking-tight" id={itemId}>{item.school}</h3>
-              <div class="text-sm tabular-nums text-gray-600" aria-label={`Period: ${item.start} to ${item.end}`}>
-                {item.start} - {item.end}
-              </div>
-            </div>
-            <div class="mt-2 text-pretty font-mono text-sm leading-relaxed text-gray-900/90 print:text-[12px]" aria-labelledby={itemId}>
-              {item.degree}
-            </div>
-          </div>
-        </article>
-      );
-    })}
+<Section title="Education" id="education-section" delay="250ms">
+  <div class="space-y-4 print:space-y-2" aria-labelledby="education-section">
+    {education.map((item) => (
+      <article class="cv-avoid-break space-y-1">
+        <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-0.5">
+          <h3 class="font-display text-[17.5px] font-bold tracking-[-0.015em] text-[var(--ink)] print:text-[13px]">
+            {item.school}
+          </h3>
+          <span
+            class="font-mono text-[12.5px] tabular-nums text-[var(--muted)] print:text-[10.5px]"
+            aria-label={`Period: ${item.start} to ${item.end}`}
+          >
+            {item.start} — {item.end}
+          </span>
+        </div>
+        <p class="text-[14.5px] text-[var(--ink-2)] print:text-[11px]">
+          {item.degree}
+          {item.gpa && (
+            <span class="font-mono text-[12.5px] text-[var(--muted)] print:text-[10px]">
+              {" "}· GPA {item.gpa}
+            </span>
+          )}
+        </p>
+      </article>
+    ))}
   </div>
 </Section>

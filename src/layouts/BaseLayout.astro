@@ -1,14 +1,20 @@
 ---
 import "../styles/global.css";
-import jetBrainsMonoLatinWoff2 from "@fontsource-variable/jetbrains-mono/files/jetbrains-mono-latin-wght-normal.woff2?url";
 
 interface Props {
   title: string;
   description: string;
+  ogDescription?: string;
   image?: string;
 }
 
-const { title, description, image = "/opengraph-image.jpg" } = Astro.props;
+const {
+  title,
+  description,
+  ogDescription = description,
+  image = "https://cv.arrazyfathan.com/opengraph-image.png",
+} = Astro.props;
+
 const analyticsMeasurementId = "G-RJ4100DQ7M";
 const shouldLoadAnalytics = import.meta.env.PROD;
 ---
@@ -19,26 +25,70 @@ const shouldLoadAnalytics = import.meta.env.PROD;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="keywords" content="arrazy, arrazyfathan, ar razy, ar razy fathan rabbani, fathan, razy, rabbani, mobile engineer, android engineer" />
+    <meta name="author" content="Ar Razy Fathan Rabbani" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#FBFAF7" />
+    <meta
+      name="keywords"
+      content="Ar Razy Fathan Rabbani, Mobile Engineer, Android Engineer, Kotlin, Jetpack Compose, Flutter, Kotlin Multiplatform, Resume, CV"
+    />
     <meta name="msvalidate.01" content="EBE6268A6D5FBD80B417C927D6DDA565" />
+    <link rel="canonical" href="https://cv.arrazyfathan.com/" />
+
+    <!-- Open Graph -->
     <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:site_name" content="Ar Razy Fathan Rabbani" />
+    <meta property="og:url" content="https://cv.arrazyfathan.com/" />
     <meta property="og:type" content="profile" />
-    <meta property="og:locale" content="id_ID" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ar Razy Fathan Rabbani — Resume (Mobile Engineer)" />
+
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@arrazyfathann" />
+    <meta name="twitter:creator" content="@arrazyfathann" />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
+    <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={image} />
+
+    <!-- Crisp Document Favicons -->
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icon.png" type="image/png" sizes="192x192" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" href="/icon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-icon.png" />
-    <link rel="preload" href={jetBrainsMonoLatinWoff2} as="font" type="font/woff2" crossorigin />
+    <link rel="apple-touch-icon" href="/apple-icon.png" sizes="180x180" />
+
+    <!-- Shared arrazyfathan.com Typography (Gabarito, Geist, Newsreader italic, Geist Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap"
+    />
+
     <title>{title}</title>
+
+    <!-- Prevent theme flash on navigation/reload (defaults to Light warm paper) -->
+    <script is:inline>
+      (function () {
+        try {
+          var saved = sessionStorage.getItem("cv-theme");
+          if (saved === "dark") {
+            document.documentElement.classList.add("dark");
+          } else {
+            document.documentElement.classList.remove("dark");
+          }
+        } catch (e) {}
+      })();
+    </script>
+
     {shouldLoadAnalytics && (
       <script is:inline define:vars={{ analyticsMeasurementId }}>
         window.dataLayer = window.dataLayer || [];
-        window.gtag = window.gtag || function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
 
         const loadAnalytics = () => {
           if (window.__googleAnalyticsLoaded) return;
@@ -57,7 +107,6 @@ const shouldLoadAnalytics = import.meta.env.PROD;
             window.requestIdleCallback(loadAnalytics, { timeout: 3000 });
             return;
           }
-
           window.setTimeout(loadAnalytics, 1500);
         };
 
@@ -69,7 +118,7 @@ const shouldLoadAnalytics = import.meta.env.PROD;
       </script>
     )}
   </head>
-  <body>
+  <body class="min-h-screen bg-[var(--bg)] font-sans text-[var(--ink)] antialiased selection:bg-[var(--accent)] selection:text-white print:bg-white print:text-[#17150F]">
     <slot />
   </body>
 </html>

@@ -1,5 +1,4 @@
 ---
-import Badge from "./Badge.astro";
 import Section from "./Section.astro";
 import type { ResumeData } from "@/data/resume";
 
@@ -10,20 +9,24 @@ interface Props {
 const { skills } = Astro.props;
 
 const groups = [
-  ["Programming Languages :", skills.programmingLanguages],
-  ["Mobile :", skills.mobile],
-  ["Tools :", skills.toolbox],
-] as const;
+  { label: "Languages", items: skills.programmingLanguages },
+  { label: "Mobile", items: skills.mobile },
+  { label: "Tools", items: skills.toolbox },
+];
 ---
 
-<Section title="Skills" id="skills-section">
-  <div class="space-y-4">
-    {groups.map(([label, values]) => (
-      <div>
-        <h3 class="mb-2 font-mono text-xs font-medium uppercase tracking-wider text-gray-600">{label}</h3>
-        <ul class="flex list-none flex-wrap gap-1 p-0" aria-label="List of skills">
-          {values.map((skill) => (
-            <li><Badge class="print:text-[10px]">{skill}</Badge></li>
+<Section title="Skills" id="skills-section" delay="200ms">
+  <div class="space-y-4 print:space-y-2" aria-labelledby="skills-section">
+    {groups.map((group) => (
+      <div class="cv-avoid-break grid grid-cols-1 gap-y-2 sm:grid-cols-[116px_1fr] sm:items-start sm:gap-x-5 print:grid-cols-[96px_1fr] print:gap-x-4">
+        <h3 class="font-mono text-[12px] font-medium text-[var(--muted)] sm:pt-1 print:pt-0.5 print:text-[10px]">
+          {group.label}
+        </h3>
+        <ul class="flex flex-wrap gap-1.5 print:gap-1" aria-label={`${group.label} skills`}>
+          {group.items.map((skill) => (
+            <li class="rounded-md border border-[var(--line)] bg-[var(--sunken)] px-2.5 py-0.5 text-[12.5px] font-medium text-[var(--ink-2)] transition-colors hover:border-[var(--line-strong)] hover:text-[var(--ink)] print:px-1.5 print:py-0 print:text-[9.5px]">
+              {skill}
+            </li>
           ))}
         </ul>
       </div>

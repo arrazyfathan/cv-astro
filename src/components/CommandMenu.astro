@@ -7,78 +7,152 @@ interface CommandLink {
 }
 
 interface Props {
+  name: string;
+  location: string;
+  email: string | null;
   links: CommandLink[];
 }
 
-const { links } = Astro.props;
+const { name, location, email, links } = Astro.props;
 ---
 
-<div data-command-menu>
-  <p class="fixed bottom-0 left-0 right-0 hidden border-t bg-white p-1 text-center text-sm text-gray-500 xl:block print:hidden">
-    Press{" "}
-    <kbd class="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-gray-100 px-1.5 font-mono text-[10px] font-medium text-gray-500 opacity-100">
-      <span class="text-xs" data-command-modifier>Ctrl</span>+J
-    </kbd>{" "}
-    to open the command menu
-  </p>
+<div data-command-menu data-email={email ?? ""}>
+  <footer class="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--line)] pt-6 font-mono text-[12px] text-[var(--muted)] print:hidden">
+    <span>{name} · {location}</span>
 
-  <button
-    type="button"
-    class="cmd-fab fixed bottom-4 right-4 flex size-12 items-center justify-center rounded-full border bg-white shadow-2xl hover:bg-gray-100 xl:hidden print:hidden"
-    aria-label="Open command menu"
-    aria-controls="command-menu-dialog"
-    aria-expanded="false"
-    data-command-trigger
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        data-footer-print
+        class="cursor-pointer transition-colors hover:text-[var(--ink)]"
+      >
+        Print PDF
+      </button>
+      <span aria-hidden="true" class="text-[var(--quiet)]">·</span>
+      <button
+        type="button"
+        data-command-trigger
+        aria-label="Open command menu"
+        aria-controls="command-menu-dialog"
+        aria-expanded="false"
+        class="inline-flex cursor-pointer items-center gap-1.5 transition-colors hover:text-[var(--ink)]"
+      >
+        <Icon name="command" class="size-3" />
+        <span>Menu</span>
+        <kbd
+          data-command-shortcut
+          class="rounded border border-[var(--line-strong)] bg-[var(--sunken)] px-1.5 py-0.5 text-[10.5px] font-medium text-[var(--ink-2)]"
+        >
+          ⌘J
+        </kbd>
+      </button>
+    </div>
+  </footer>
+
+  <div
+    class="cmd-overlay fixed inset-0 z-50 flex items-start justify-center bg-black/45 px-4 pt-[14vh] backdrop-blur-[2px] print:hidden"
+    role="presentation"
+    hidden
+    data-command-overlay
   >
-    <Icon name="command" class="size-6" />
-  </button>
-
-  <div class="cmd-overlay fixed inset-0 z-50 flex items-start justify-center bg-black/40 px-4 pt-[12vh] print:hidden" role="presentation" hidden data-command-overlay>
     <div
       id="command-menu-dialog"
-      class="cmd-dialog w-full max-w-lg overflow-hidden rounded-lg border bg-white shadow-2xl"
+      class="cmd-dialog w-full max-w-lg overflow-hidden rounded-xl border border-[var(--line-strong)] bg-[var(--surface)] text-[var(--ink)] shadow-2xl"
       role="dialog"
       aria-modal="true"
       aria-label="Command menu"
       data-command-dialog
     >
-      <div class="flex items-center border-b px-3">
-        <Icon name="command" class="mr-2 size-4 shrink-0 opacity-50" />
+      <div class="flex items-center border-b border-[var(--line)] px-3.5">
+        <Icon name="search" class="mr-2.5 size-4 shrink-0 text-[var(--muted)]" />
         <input
-          class="h-12 w-full bg-transparent text-sm outline-none placeholder:text-gray-500"
-          placeholder="Type a command or search..."
+          class="h-12 w-full bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
+          placeholder="Search actions or links..."
           autocomplete="off"
           data-command-search
         />
-        <button type="button" class="cmd-close rounded p-1 text-gray-500 hover:bg-gray-100" aria-label="Close command menu" data-command-close>
+        <button
+          type="button"
+          class="cursor-pointer rounded-md p-1 text-[var(--muted)] transition-colors hover:bg-[var(--sunken)] hover:text-[var(--ink)]"
+          aria-label="Close command menu"
+          data-command-close
+        >
           <Icon name="x" class="size-4" />
         </button>
       </div>
 
-      <div class="max-h-[320px] overflow-y-auto p-2">
-        <div class="px-2 py-1.5 font-mono text-xs font-medium uppercase tracking-wider text-gray-500">Actions</div>
-        <a href="/ar-razy-fathan-rabbani-cv.pdf" download="ar-razy-fathan-rabbani-cv.pdf" class="cmd-item flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-sm hover:bg-gray-100" data-command-download>
-          <Icon name="download" class="size-4" />
-          <span>Download PDF</span>
-        </a>
+      <div class="max-h-[380px] overflow-y-auto p-2">
+        <div data-group-actions>
+          <div class="px-2.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--muted)]">
+            Actions
+          </div>
+          <button
+            type="button"
+            data-command-item
+            data-command-title="print save as pdf"
+            data-action-print
+            class="flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+          >
+            <Icon name="printer" class="size-4 text-[var(--muted)]" />
+            <span>Print / Save as PDF</span>
+          </button>
+          <a
+            href="/ar-razy-fathan-rabbani-cv.pdf"
+            download="ar-razy-fathan-rabbani-cv.pdf"
+            data-command-item
+            data-command-title="download pdf resume"
+            data-action-download
+            class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+          >
+            <Icon name="download" class="size-4 text-[var(--muted)]" />
+            <span>Download PDF</span>
+          </a>
+          {email && (
+            <button
+              type="button"
+              data-command-item
+              data-command-title={`copy email ${email}`}
+              data-action-copy
+              class="flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+            >
+              <Icon name="copy" class="size-4 text-[var(--muted)]" />
+              <span>Copy email ({email})</span>
+            </button>
+          )}
+          <button
+            type="button"
+            data-command-item
+            data-command-title="toggle light dark paper theme"
+            data-action-theme
+            class="flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+          >
+            <Icon name="moon" class="size-4 text-[var(--muted)]" />
+            <span>Toggle light / dark paper</span>
+          </button>
+        </div>
 
-        <div class="mt-2 border-t pt-2">
-          <div class="px-2 py-1.5 font-mono text-xs font-medium uppercase tracking-wider text-gray-500">Links</div>
-          <p class="px-2 py-6 text-center text-sm text-gray-500" hidden data-command-empty>No results found.</p>
+        <div class="mt-2 border-t border-[var(--line)] pt-2" data-group-links>
+          <div class="px-2.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--muted)]">
+            Links
+          </div>
           {links.map((link) => (
             <a
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              class="cmd-item flex w-full items-center gap-2 rounded-sm px-2 py-2 text-left text-sm hover:bg-gray-100"
-              data-command-link
+              data-command-item
               data-command-title={link.title.toLowerCase()}
+              class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
             >
-              <Icon name="external-link" class="size-4" />
+              <Icon name="arrow-up-right" class="size-4 text-[var(--muted)]" />
               <span>{link.title}</span>
             </a>
           ))}
         </div>
+
+        <p class="px-2 py-6 text-center text-sm text-[var(--muted)]" hidden data-command-empty>
+          No results found.
+        </p>
       </div>
     </div>
   </div>
@@ -89,26 +163,34 @@ const { links } = Astro.props;
 
   menus.forEach((menu) => {
     const trigger = menu.querySelector<HTMLButtonElement>("[data-command-trigger]");
+    const footerPrint = menu.querySelector<HTMLButtonElement>("[data-footer-print]");
     const overlay = menu.querySelector<HTMLElement>("[data-command-overlay]");
     const dialog = menu.querySelector<HTMLElement>("[data-command-dialog]");
     const closeButton = menu.querySelector<HTMLButtonElement>("[data-command-close]");
     const searchInput = menu.querySelector<HTMLInputElement>("[data-command-search]");
     const emptyState = menu.querySelector<HTMLElement>("[data-command-empty]");
-    const modifier = menu.querySelector<HTMLElement>("[data-command-modifier]");
-    const links = Array.from(menu.querySelectorAll<HTMLElement>("[data-command-link]"));
+    const shortcutEl = menu.querySelector<HTMLElement>("[data-command-shortcut]");
+    const items = Array.from(menu.querySelectorAll<HTMLElement>("[data-command-item]"));
+    const actionPrint = menu.querySelector<HTMLButtonElement>("[data-action-print]");
+    const actionDownload = menu.querySelector<HTMLAnchorElement>("[data-action-download]");
+    const actionCopy = menu.querySelector<HTMLButtonElement>("[data-action-copy]");
+    const actionTheme = menu.querySelector<HTMLButtonElement>("[data-action-theme]");
+    const email = menu.dataset.email ?? "";
 
     if (!trigger || !overlay || !dialog || !closeButton || !searchInput || !emptyState) return;
 
     const isMac = window.navigator.userAgent.includes("Mac");
-    if (modifier) modifier.textContent = isMac ? "⌘" : "Ctrl";
+    if (shortcutEl) shortcutEl.textContent = isMac ? "⌘J" : "Ctrl+J";
 
-    const filterLinks = () => {
+    let closeTimer: number | null = null;
+
+    const filterItems = () => {
       const query = searchInput.value.trim().toLowerCase();
       let visibleCount = 0;
 
-      links.forEach((link) => {
-        const matches = !query || link.dataset.commandTitle?.includes(query);
-        link.hidden = !matches;
+      items.forEach((item) => {
+        const matches = !query || (item.dataset.commandTitle ?? "").includes(query);
+        item.hidden = !matches;
         if (matches) visibleCount += 1;
       });
 
@@ -124,7 +206,7 @@ const { links } = Astro.props;
       overlay.hidden = false;
       trigger.setAttribute("aria-expanded", "true");
       searchInput.value = "";
-      filterLinks();
+      filterItems();
       requestAnimationFrame(() => {
         requestAnimationFrame(() => overlay.classList.add("is-open"));
         searchInput.focus();
@@ -139,10 +221,10 @@ const { links } = Astro.props;
         overlay.hidden = true;
         overlay.classList.remove("closing");
         closeTimer = null;
-      }, 200);
+      }, 180);
     };
 
-    let closeTimer: number | null = null;
+    footerPrint?.addEventListener("click", () => window.print());
 
     trigger.addEventListener("click", () => {
       if (overlay.hidden) openMenu();
@@ -150,18 +232,45 @@ const { links } = Astro.props;
     });
 
     closeButton.addEventListener("click", closeMenu);
-    searchInput.addEventListener("input", filterLinks);
+    searchInput.addEventListener("input", filterItems);
     overlay.addEventListener("mousedown", closeMenu);
-    dialog.addEventListener("mousedown", (event) => event.stopPropagation());
+    dialog.addEventListener("mousedown", (e) => e.stopPropagation());
+
+    actionPrint?.addEventListener("click", () => {
+      closeMenu();
+      window.setTimeout(() => window.print(), 120);
+    });
+
+    actionDownload?.addEventListener("click", () => {
+      closeMenu();
+    });
+
+    actionCopy?.addEventListener("click", () => {
+      closeMenu();
+      if (email) navigator.clipboard?.writeText(email);
+    });
+
+    actionTheme?.addEventListener("click", () => {
+      closeMenu();
+      const nextDark = document.documentElement.classList.toggle("dark");
+      try {
+        sessionStorage.setItem("cv-theme", nextDark ? "dark" : "light");
+      } catch {
+        // Ignore storage errors.
+      }
+      window.dispatchEvent(new CustomEvent("cv:theme-sync"));
+    });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key.toLowerCase() === "j" && (event.metaKey || event.ctrlKey)) {
+      const k = event.key.toLowerCase();
+      if ((k === "j" || k === "k") && (event.metaKey || event.ctrlKey)) {
         event.preventDefault();
         if (overlay.hidden) openMenu();
         else closeMenu();
       }
-
-      if (event.key === "Escape") closeMenu();
+      if (event.key === "Escape" && !overlay.hidden) {
+        closeMenu();
+      }
     });
   });
 </script>

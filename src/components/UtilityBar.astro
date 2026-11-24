@@ -1,0 +1,108 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  websiteUrl: string;
+}
+
+const { websiteUrl } = Astro.props;
+---
+
+<nav
+  aria-label="Resume utilities"
+  class="mb-10 flex items-center justify-between gap-4 border-b border-[var(--line)] pb-4 print:hidden"
+>
+  <a
+    href={websiteUrl}
+    class="group inline-flex items-center gap-1.5 font-mono text-[12.5px] text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
+  >
+    <Icon
+      name="arrow-left"
+      class="size-3.5 transition-transform duration-200 ease-out group-hover:-translate-x-0.5"
+    />
+    <span>arrazyfathan.com</span>
+  </a>
+
+  <div class="flex items-center gap-2">
+    <button
+      type="button"
+      data-print-button
+      class="cv-press inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--line-strong)] bg-[var(--surface)] px-3 py-1.5 font-mono text-[12px] font-medium text-[var(--ink)] hover:border-[var(--ink)]/30 hover:bg-[var(--sunken)]"
+      aria-label="Print or save resume as PDF"
+    >
+      <Icon name="printer" class="size-3.5 text-[var(--muted)]" />
+      <span>Print PDF</span>
+    </button>
+
+    <button
+      type="button"
+      data-theme-toggle
+      class="cv-press inline-flex size-8 cursor-pointer items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--ink)]"
+      aria-label="Switch to dark mode"
+      title="Dark mode (D)"
+    >
+      <span data-theme-icon-moon class="inline-flex">
+        <Icon name="moon" class="size-3.5" />
+      </span>
+      <span data-theme-icon-sun class="hidden">
+        <Icon name="sun" class="size-3.5" />
+      </span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  const printBtn = document.querySelector<HTMLButtonElement>("[data-print-button]");
+  const themeBtn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+  const moonIcon = themeBtn?.querySelector<HTMLElement>("[data-theme-icon-moon]");
+  const sunIcon = themeBtn?.querySelector<HTMLElement>("[data-theme-icon-sun]");
+
+  const syncThemeUI = () => {
+    const isDark = document.documentElement.classList.contains("dark");
+    if (moonIcon && sunIcon) {
+      moonIcon.classList.toggle("hidden", isDark);
+      moonIcon.classList.toggle("inline-flex", !isDark);
+      sunIcon.classList.toggle("hidden", !isDark);
+      sunIcon.classList.toggle("inline-flex", isDark);
+    }
+    if (themeBtn) {
+      themeBtn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      themeBtn.setAttribute("title", isDark ? "Light mode (D)" : "Dark mode (D)");
+    }
+  };
+
+  const toggleTheme = () => {
+    const nextDark = document.documentElement.classList.toggle("dark");
+    try {
+      sessionStorage.setItem("cv-theme", nextDark ? "dark" : "light");
+    } catch {
+      // Ignore storage errors in restricted contexts.
+    }
+    syncThemeUI();
+  };
+
+  syncThemeUI();
+
+  printBtn?.addEventListener("click", () => window.print());
+  themeBtn?.addEventListener("click", toggleTheme);
+
+  window.addEventListener("cv:theme-sync", syncThemeUI);
+
+  window.addEventListener("keydown", (e) => {
+    const target = e.target as HTMLElement | null;
+    if (
+      e.metaKey ||
+      e.ctrlKey ||
+      e.altKey ||
+      target?.tagName === "INPUT" ||
+      target?.tagName === "TEXTAREA" ||
+      target?.isContentEditable
+    ) {
+      return;
+    }
+    if (e.key === "d" || e.key === "D") {
+      e.preventDefault();
+      toggleTheme();
+    }
+  });
+</script>

@@ -1,5 +1,5 @@
 ---
-import Badge from "./Badge.astro";
+import Icon from "./Icon.astro";
 import Section from "./Section.astro";
 import type { ResumeData } from "@/data/resume";
 
@@ -8,46 +8,67 @@ interface Props {
 }
 
 const { projects } = Astro.props;
-
-const printableUrl = (url: string) =>
-  url.replace("https://", "").replace("http://", "").replace("www.", "").replace(/\/$/, "");
 ---
 
-<Section title="Projects" id="side-projects" class="print-force-new-page scroll-mb-16 print:space-y-4 print:pt-12">
-  <div class="grid grid-cols-1 gap-4 print:grid-cols-3 print:gap-2 md:grid-cols-2 lg:grid-cols-3" role="feed" aria-labelledby="side-projects">
+<Section title="Selected Projects" id="selected-projects" delay="150ms">
+  <div aria-labelledby="selected-projects">
     {projects.map((project) => {
-      const href = project.link.href;
+      const href = project.link?.href;
+      const label = project.link?.label;
       return (
-        <article class="h-full">
-          <div class="resume-card project-card flex h-full flex-col overflow-hidden border p-3" role="article">
-            <div class="space-y-1">
-              <h3 class="text-base font-semibold leading-none tracking-tight">
-                {href ? (
-                  <>
-                    <a href={href} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:underline" aria-label={`${project.title} project (opens in new tab)`}>
-                      {project.title}
-                      <span class="size-1 rounded-full bg-green-500" aria-label="Active project indicator"></span>
-                    </a>
-                    <div class="hidden font-mono text-xs underline print:block" aria-hidden="true">
-                      {printableUrl(href)}
-                    </div>
-                  </>
-                ) : (
+        <article class="cv-avoid-break border-b border-[var(--line)] py-4 first:pt-0 last:border-b-0 last:pb-0 print:py-2.5">
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <h3 class="font-display text-[17px] font-bold tracking-[-0.01em] text-[var(--ink)] print:text-[12.5px]">
+              {href ? (
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group inline-flex items-center gap-1 transition-colors hover:text-[var(--accent)]"
+                  aria-label={`${project.title} (${label})`}
+                >
                   <span>{project.title}</span>
-                )}
-              </h3>
-              <p class="text-pretty font-mono text-xs leading-relaxed text-gray-600 print:text-[10px]" aria-label="Project description">
-                {project.description}
-              </p>
-            </div>
-            {project.techStack.length > 0 && (
-              <ul class="mt-auto flex list-none flex-wrap gap-1 pt-2 p-0" aria-label="Technologies used">
-                {project.techStack.map((tag) => (
-                  <li><Badge variant="secondary" class="px-1 py-0 text-[10px] print:px-1 print:py-0.5 print:text-[8px] print:leading-tight">{tag}</Badge></li>
-                ))}
-              </ul>
+                  <Icon
+                    name="arrow-up-right"
+                    class="size-3.5 text-[var(--quiet)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--accent)] print:hidden"
+                  />
+                </a>
+              ) : (
+                <span>{project.title}</span>
+              )}
+            </h3>
+
+            {href ? (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="font-mono text-[11.5px] text-[var(--muted)] transition-colors hover:text-[var(--accent)] print:text-[9.5px]"
+              >
+                {label}
+              </a>
+            ) : (
+              label && (
+                <span class="font-mono text-[11px] text-[var(--quiet)] print:text-[9.5px]">
+                  {label}
+                </span>
+              )
             )}
           </div>
+
+          <p class="mt-1.5 text-pretty text-[14px] leading-[1.62] text-[var(--ink-2)] print:mt-0.5 print:text-[10.5px] print:leading-[1.45]">
+            {project.description}
+          </p>
+
+          {project.techStack.length > 0 && (
+            <ul class="mt-2.5 flex flex-wrap gap-1.5 print:mt-1.5" aria-label="Technologies used">
+              {project.techStack.map((tag) => (
+                <li class="rounded-md border border-[var(--line)] bg-[var(--sunken)] px-2 py-0.5 font-mono text-[11px] text-[var(--muted)] print:px-1.5 print:py-0 print:text-[8.5px]">
+                  {tag}
+                </li>
+              ))}
+            </ul>
+          )}
         </article>
       );
     })}

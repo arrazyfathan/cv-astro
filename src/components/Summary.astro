@@ -8,8 +8,11 @@ interface Props {
 const { summary } = Astro.props;
 ---
 
-<Section title="About" id="about-section">
-  <p class="text-pretty font-mono text-sm leading-relaxed text-gray-900/90 print:text-[12px]">
+<Section title="Summary" id="about-section" delay="50ms">
+  <p
+    class="text-justify text-[15px] leading-[1.72] text-[var(--ink-2)] print:text-[11px] print:leading-[1.55]"
+    aria-labelledby="about-section"
+  >
     {summary}
   </p>
 </Section>

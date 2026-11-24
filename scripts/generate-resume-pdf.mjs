@@ -144,7 +144,7 @@ for (const item of resume.education) {
   setFont(8.5, colors.muted);
   doc.text(`  ${item.start} - ${item.end}`, { align: "right" });
   doc.y += 3;
-  drawBody(item.degree, { size: 9.2, color: colors.muted });
+  drawBody(item.gpa ? `${item.degree}  ·  GPA ${item.gpa}` : item.degree, { size: 9.2, color: colors.muted });
   doc.y += 10;
 }
 drawSectionHeading("Skills");

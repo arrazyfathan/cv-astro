@@ -8,7 +8,9 @@ export interface ResumeData {
   location: string;
   locationLink: string;
   about: string;
+  availability: string;
   description: string;
+  ogDescription: string;
   summary: string;
   avatarUrl: string;
   personalWebsiteUrl: string;
@@ -17,6 +19,7 @@ export interface ResumeData {
     tel: string | null;
     social: Array<{
       name: string;
+      handle: string;
       url: string;
       icon: SocialIcon;
     }>;
@@ -24,12 +27,14 @@ export interface ResumeData {
   education: Array<{
     school: string;
     degree: string;
+    gpa?: string;
     start: string;
     end: string;
   }>;
   work: Array<{
     company: string;
     link: string;
+    location?: string;
     badges: string[];
     title: string;
     start: string;

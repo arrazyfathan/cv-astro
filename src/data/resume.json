@@ -1,24 +1,28 @@
 {
   "name": "Ar Razy Fathan Rabbani",
-  "initials": "AFR",
-  "location": "Yogyakarta, Indonesia 🇮🇩",
-  "locationLink": "https://www.google.com/maps/place/Yogyakarta",
-  "about": "Mobile Engineer",
-  "description": "Ar Razy Fathan Rabbani - Mobile Engineer based in Yogyakarta, Indonesia 🇮🇩. With 4 years of experience in mobile app development, proficient in Kotlin/Java, and always open to learning new technologies. Skilled in both individual and team collaboration.",
-  "summary": "Mobile Engineer with 4 years of experience in developing mobile applications. Open to learn new things and up to any challenges. Able to work individually and team work. Proficient in various modern technologies of android development with Kotlin/Java and Multi-platform development with Kotlin Multiplatform Mobile (KMP) and Flutter.",
+  "initials": "AR",
+  "location": "Surakarta, Indonesia",
+  "locationLink": "https://www.google.com/maps/place/Surakarta",
+  "about": "Mobile Engineer · Android & iOS",
+  "availability": "Open for mobile engineering roles & collaborations",
+  "description": "Mobile Engineer in Surakarta, Indonesia — 4+ years shipping Android and iOS apps with Kotlin, Jetpack Compose, Flutter, and KMP.",
+  "ogDescription": "Resume of Ar Razy Fathan Rabbani — Mobile Engineer shipping Android & iOS apps with Kotlin, Compose, and Flutter.",
+  "summary": "Mobile Engineer with 4+ years of experience building and shipping reliable applications for Android and iOS. Proficient in modern native Android development with Kotlin, Java, and Jetpack Compose, as well as cross-platform development with Kotlin Multiplatform (KMP) and Flutter. Comfortable owning end-to-end features independently or collaborating closely with designers and backend teams.",
   "avatarUrl": "/profile-image.jpg",
-  "personalWebsiteUrl": "",
+  "personalWebsiteUrl": "https://arrazyfathan.com",
   "contact": {
     "email": "hello@arrazyfathan.com",
     "tel": null,
     "social": [
       {
         "name": "GitHub",
+        "handle": "arrazyfathan",
         "url": "https://github.com/arrazyfathan",
         "icon": "github"
       },
       {
         "name": "LinkedIn",
+        "handle": "in/arrazyfathan",
         "url": "https://www.linkedin.com/in/arrazyfathan/",
         "icon": "linkedin"
       }
@@ -28,186 +32,187 @@
     {
       "school": "Universitas Islam Indonesia",
       "degree": "Bachelor's Degree in Computer Science",
+      "gpa": "3.68 / 4.00",
       "start": "2017",
-      "end": "2021 (GPA: 3.68)"
+      "end": "2021"
     }
   ],
   "work": [
     {
       "company": "Gamatechno Indonesia",
       "link": "https://www.gamatechno.com/",
-      "badges": ["Remote", "Android", "Kotlin", "Java", "Flutter"],
+      "location": "Remote",
+      "badges": ["Android", "Kotlin", "Java", "Flutter"],
       "title": "Mobile Engineer",
       "start": "2022",
       "end": null,
       "description": {
-        "paragraph": "I work as an Android Engineer in the Digital Solutions division. I am involved in the development of various applications, which range from product-based to project-based. My primary focus is on developing project-based applications for government entities, with the aim of enhancing their productivity.",
+        "paragraph": "Android Engineer in the Digital Solutions division, building product-based and project-based mobile applications — with a primary focus on public-sector and enterprise apps that improve operational productivity.",
         "bullets": [
-          "Collaborated with a team of developers to design and implement Android applications, ensuring optimal performance and user experience",
-          "Developed and maintained code for new features, enhancements, and bug fixes in alignment with project requirements",
-          "Worked closely with UX/UI designers to implement visually appealing and intuitive interfaces",
-          "Stayed current with the latest Android development trends and technologies, integrating them into projects for continuous improvement."
+          "Collaborated with cross-functional engineering teams to architect and ship Android applications focused on smooth performance and reliable user experience.",
+          "Developed and maintained new features, architectural enhancements, and production bug fixes aligned with evolving product requirements.",
+          "Partnered closely with UI/UX designers to translate complex workflows into clean, intuitive mobile interfaces.",
+          "Evaluated and adopted modern Android tooling and architectural patterns across ongoing client and internal projects."
         ]
       }
     },
     {
       "company": "Freelance",
       "link": "",
-      "badges": ["Remote", "Android", "Flutter"],
+      "location": "Remote",
+      "badges": ["Android", "Flutter", "iOS"],
       "title": "Mobile Developer",
       "start": "2024",
       "end": null,
       "description": {
-        "paragraph": "As a freelance Android Developer, I work independently to design, develop, and maintain Android applications for various clients. I focus on building high-quality, user-friendly, and scalable mobile solutions tailored to clients needs.",
+        "paragraph": "Independent mobile engineer partnering directly with clients to design, build, and maintain scalable Android and cross-platform applications tailored to business goals.",
         "bullets": [
-          "Designed and implemented Android applications, ensuring optimal performance and smooth user experience.",
-          "Developed and maintained features, enhancements, and bug fixes based on project requirements.",
-          "Worked closely with clients to understand their needs and translate them into functional mobile applications.",
-          "Stayed up to date with the latest Android development trends and best practices to deliver cutting-edge solutions."
+          "Designed and implemented end-to-end mobile applications with attention to runtime performance, offline resilience, and polish.",
+          "Delivered iterative features, enhancements, and ongoing maintenance directly against client milestones.",
+          "Worked closely with stakeholders to turn open-ended requirements into shippable mobile products."
         ]
       }
     }
   ],
   "skills": {
-    "programmingLanguages": ["Kotlin", "Java", "Dart", "JavaScript", "TypeScript"],
+    "programmingLanguages": ["Kotlin", "Java", "Dart", "TypeScript", "JavaScript"],
     "mobile": [
       "Android Native",
       "Jetpack Compose",
-      "KMP",
+      "Kotlin Multiplatform (KMP)",
       "Compose Multiplatform",
       "Flutter",
       "Android Jetpack",
       "XML",
-      "CI/CD",
+      "Coroutines",
+      "Clean Architecture",
       "MVVM",
       "MVI",
       "MVP",
-      "Clean Architecture",
-      "Coroutines"
+      "CI/CD"
     ],
     "toolbox": [
       "Android Studio",
+      "IntelliJ IDEA",
+      "Xcode",
+      "VS Code",
+      "Zed",
       "Firebase",
       "Gradle",
       "Git",
-      "Android SDK",
+      "GitLab CI/CD",
       "Jenkins",
-      "Gitlab CI/CD",
-      "VS Code",
-      "Intellij IDEA",
       "Postman",
-      "Figma",
-      "Xcode",
-      "Zed"
+      "Figma"
     ]
   },
   "projects": [
     {
       "title": "Obscurenv",
       "techStack": ["Go", "PostgreSQL", "Cobra CLI", "AES-256-GCM", "Argon2id", "Docker Compose"],
-      "description": "A self-hosted, zero-knowledge encrypted .env storage service with a Go REST API and CLI that keeps encryption and decryption local.",
+      "description": "Self-hosted, zero-knowledge encrypted .env storage service with a Go REST API and CLI that keeps encryption and decryption local.",
       "link": {
-        "label": "Obscurenv",
+        "label": "GitHub",
         "href": "https://github.com/arrazyfathan/obscurenv"
       }
     },
     {
       "title": "Obscurenv Web",
       "techStack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Web Crypto", "Vitest"],
-      "description": "A self-hosted web dashboard for managing Obscurenv projects and encrypted .env files, with local browser decryption and passkey authentication.",
+      "description": "Self-hosted web dashboard for managing Obscurenv projects and encrypted .env files, with local browser decryption and passkey authentication.",
       "link": {
-        "label": "Obscurenv Web",
+        "label": "GitHub",
         "href": "https://github.com/arrazyfathan/obscurenv-web"
-      }
-    },
-    {
-      "title": "KBBI",
-      "techStack": ["Android", "Kotlin"],
-      "description": "An Android dictionary application for searching Indonesian words and exploring KBBI definitions.",
-      "link": {
-        "label": "KBBI",
-        "href": "https://github.com/arrazyfathan/kbbi"
       }
     },
     {
       "title": "KBBI Multiplatform",
       "techStack": ["Kotlin Multiplatform", "Compose Multiplatform", "Material 3", "Koin", "Ktor", "Room"],
-      "description": "A shared Indonesian dictionary application for Android, iOS, web, and desktop, with cross-platform search, word details, bookmarks, and history.",
+      "description": "Shared Indonesian dictionary application for Android, iOS, web, and desktop, with cross-platform search, word details, bookmarks, and history.",
       "link": {
-        "label": "KBBI Multiplatform",
+        "label": "GitHub",
         "href": "https://github.com/arrazyfathan/kbbi-kmp"
       }
     },
     {
-      "title": "Astro CV",
-      "techStack": ["Astro", "TypeScript", "Tailwind CSS", "Cloudflare Pages"],
-      "description": "A fast, print-friendly CV website built with Astro, with resume content driven by a typed JSON data model.",
+      "title": "KBBI",
+      "techStack": ["Android", "Kotlin"],
+      "description": "Android dictionary application for searching Indonesian words and exploring KBBI definitions.",
       "link": {
-        "label": "Astro CV",
+        "label": "GitHub",
+        "href": "https://github.com/arrazyfathan/kbbi"
+      }
+    },
+    {
+      "title": "Astro CV",
+      "techStack": ["Astro", "TypeScript", "Tailwind CSS", "Cloudflare Workers"],
+      "description": "Fast, print-friendly CV website built with Astro, driven by a typed JSON data model with automated PDF generation.",
+      "link": {
+        "label": "GitHub",
         "href": "https://github.com/arrazyfathan/cv-astro"
       }
     },
     {
       "title": "JakLingko App",
-      "techStack": ["Android Native", "Kotlin & Java", "Firebase", "NFC", "Room Database", "Google Maps SDK", "Coroutines", "MVVM"],
-      "description": "Jak Lingko is a public transport integration program designed to integrate payment and physical connection between transport modes in Jakarta.",
+      "techStack": ["Android Native", "Kotlin & Java", "NFC", "Google Maps SDK", "Room", "Coroutines", "Firebase", "MVVM"],
+      "description": "Public transport integration app unifying ticketing, NFC card payments, and multi-modal transit routes across Jakarta.",
       "link": {
-        "label": "JakLingko",
+        "label": "Play Store",
         "href": "https://play.google.com/store/apps/details?id=com.jaklingkoindonesia.app&pcampaignid=web_share"
       }
     },
     {
-      "title": "Kosmo Kominfo",
-      "techStack": ["Android Native", "Kotlin", "RxJava", "MVP", "Firebase", "MLKit"],
-      "description": "Kosmo Kominfo is a productivity companion app designed for the members of the Ministry of Communication and Informatics.",
+      "title": "HiiGeek",
+      "techStack": ["Flutter", "Dart", "Bloc", "Firebase", "Android", "iOS"],
+      "description": "Official mobile app for GIK UGM — a creative hub connecting students, lecturers, industry professionals, artists, and public sectors.",
       "link": {
-        "label": "Kosmo Komdigi",
+        "label": "Play Store",
+        "href": "https://play.google.com/store/apps/details?id=id.hiigeek&pcampaignid=web_share"
+      }
+    },
+    {
+      "title": "Kosmo Kominfo",
+      "techStack": ["Android Native", "Kotlin", "RxJava", "ML Kit", "Firebase", "MVP"],
+      "description": "Productivity companion app built for members of Indonesia's Ministry of Communication and Informatics.",
+      "link": {
+        "label": "Play Store",
         "href": "https://play.google.com/store/apps/details?id=com.kosmokominfo&pcampaignid=web_share"
       }
     },
     {
-      "title": "Notes Agent ( Voice to Text )",
-      "techStack": ["Android Native", "Kotlin", "Firebase", "MVI"],
-      "description": "This app assists agents in creating notes using voice-to-text technology, allowing them to transcribe their thoughts either in real time or from recordings.",
-      "link": {
-        "label": "Notes Agent",
-        "href": ""
-      }
-    },
-    {
       "title": "Lerun",
-      "techStack": ["Android Native", "Kotlin", "Firebase", "MVVM", "Room Database", "Coroutines", "Google Maps", "Dagger Hilt"],
-      "description": "Lerun is a running tracking application based on modern Android tech-stacks and MVVM architecture.",
+      "techStack": ["Android Native", "Kotlin", "Google Maps", "Dagger Hilt", "Room", "Coroutines", "Firebase", "MVVM"],
+      "description": "Open-source running tracker built with modern Android architecture, live route mapping, and offline run history.",
       "link": {
-        "label": "Lerun",
+        "label": "GitHub",
         "href": "https://github.com/arrazyfathan/Lerun"
       }
     },
     {
-      "title": "BeVoucher - Berau Coal HSE Automation",
-      "techStack": ["Android Native", "Java", "Firebase", "MVP", "Room Database"],
-      "description": "Implemented a voucher system that enhances user experience by offering additional benefits and rewards, driving user engagement and loyalty within the app.",
-      "link": {
-        "label": "BeVoucher",
-        "href": ""
-      }
-    },
-    {
       "title": "Panic Button",
-      "techStack": ["Android Native", "Kotlin", "Firebase", "MVI", "Google Maps", "Coroutines"],
-      "description": "This app enables agents to quickly send emergency alerts or SOS messages, along with their current location, text, and video. It is designed to provide a swift and reliable way to communicate urgent situations, ensuring that help can be dispatched promptly.",
+      "techStack": ["Android Native", "Kotlin", "Google Maps", "Coroutines", "Firebase", "MVI"],
+      "description": "Emergency response app enabling field agents to dispatch instant SOS alerts with live GPS coordinates, text, and video.",
       "link": {
-        "label": "Panic Button",
+        "label": "Internal",
         "href": ""
       }
     },
     {
-      "title": "HiiGeek",
-      "techStack": ["Flutter", "Dart", "Firebase", "Bloc", "iOS", "Android"],
-      "description": "HiiGeek is the official app of GIK UGM, a Super Creative Hub that connects students, lecturers, industry professionals, artists, and public sectors in a vibrant ecosystem of innovation and creativity.",
+      "title": "Notes Agent (Voice to Text)",
+      "techStack": ["Android Native", "Kotlin", "Firebase", "MVI"],
+      "description": "Voice-to-text field note companion allowing agents to capture and transcribe observations in real time or from recordings.",
       "link": {
-        "label": "HiiGeek",
-        "href": "https://play.google.com/store/apps/details?id=id.hiigeek&pcampaignid=web_share"
+        "label": "Internal",
+        "href": ""
+      }
+    },
+    {
+      "title": "BeVoucher — Berau Coal HSE Automation",
+      "techStack": ["Android Native", "Java", "Room", "Firebase", "MVP"],
+      "description": "Rewards and voucher module for Berau Coal's HSE automation suite to encourage safety reporting and employee engagement.",
+      "link": {
+        "label": "Internal",
+        "href": ""
       }
     }
   ]
