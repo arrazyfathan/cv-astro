@@ -8,9 +8,9 @@ import Summary from "@/components/Summary.astro";
 import UtilityBar from "@/components/UtilityBar.astro";
 import WorkExperience from "@/components/WorkExperience.astro";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { RESUME_DATA } from "@/data/resume";
+import { RESUME_DATA, RESUME_DATA_ID, UI_COPY } from "@/data/resume";
 
-const title = `${RESUME_DATA.name} — Resume`;
+const title = UI_COPY.en.pageTitle;
 const commandLinks = [
   ...(RESUME_DATA.personalWebsiteUrl
     ? [{ url: RESUME_DATA.personalWebsiteUrl, title: "Personal Website (arrazyfathan.com)" }]
@@ -34,12 +34,12 @@ const commandLinks = [
     <UtilityBar websiteUrl={RESUME_DATA.personalWebsiteUrl} />
 
     <div class="space-y-8 print:space-y-4" aria-label="Resume Content">
-      <Header resume={RESUME_DATA} />
-      <Summary summary={RESUME_DATA.summary} />
-      <WorkExperience work={RESUME_DATA.work} />
-      <Projects projects={RESUME_DATA.projects} />
+      <Header resume={RESUME_DATA} resumeId={RESUME_DATA_ID} />
+      <Summary summary={RESUME_DATA.summary} summaryId={RESUME_DATA_ID.summary} />
+      <WorkExperience work={RESUME_DATA.work} workId={RESUME_DATA_ID.work} />
+      <Projects projects={RESUME_DATA.projects} projectsId={RESUME_DATA_ID.projects} />
       <Skills skills={RESUME_DATA.skills} />
-      <Education education={RESUME_DATA.education} />
+      <Education education={RESUME_DATA.education} educationId={RESUME_DATA_ID.education} />
     </div>
 
     <CommandMenu

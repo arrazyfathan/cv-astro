@@ -1,0 +1,183 @@
+---
+import Icon from "./Icon.astro";
+import { PDF_FILES, UI_COPY } from "@/data/resume";
+
+interface Props {
+  placement?: "bottom" | "top";
+  size?: "sm" | "xs";
+}
+
+const { placement = "bottom", size = "sm" } = Astro.props;
+const isTop = placement === "top";
+const isXs = size === "xs";
+---
+
+<div class="relative inline-flex" data-pdf-popover-root>
+  <button
+    type="button"
+    data-pdf-popover-trigger
+    aria-haspopup="menu"
+    aria-expanded="false"
+    class:list={[
+      "group inline-flex cursor-pointer items-center gap-1 font-mono transition-colors hover:text-[var(--ink)]",
+      isXs ? "text-[12px] text-[var(--muted)]" : "text-[12.5px] text-[var(--ink-2)]",
+    ]}
+    aria-label="Download resume as PDF"
+  >
+    <span
+      class:list={[
+        "underline decoration-[var(--line-strong)] transition-colors group-hover:decoration-[var(--ink)]",
+        isXs ? "underline-offset-[4px]" : "underline-offset-[5px]",
+      ]}
+    >
+      <span data-lang-view="en">{UI_COPY.en.downloadPdf}</span>
+      <span data-lang-view="id">{UI_COPY.id.downloadPdf}</span>
+    </span>
+    <Icon
+      name="arrow-up-right"
+      class:list={[
+        "text-[var(--quiet)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--ink)]",
+        isXs ? "size-3" : "size-3.5",
+      ]}
+    />
+  </button>
+
+  <div
+    role="menu"
+    aria-label="Download PDF language options"
+    hidden
+    data-pdf-popover-panel
+    data-placement={placement}
+    class:list={[
+      "pdf-popover absolute right-0 z-40 w-[224px] rounded-xl border border-[var(--line-strong)] bg-[var(--surface)] p-1.5 text-[var(--ink)] shadow-lg",
+      isTop ? "bottom-full mb-2.5" : "top-full mt-2.5",
+    ]}
+  >
+    <span
+      aria-hidden="true"
+      class:list={[
+        "pointer-events-none absolute right-5 size-2.5 rotate-45 bg-[var(--surface)]",
+        isTop
+          ? "-bottom-[5.5px] border-b border-r border-[var(--line-strong)]"
+          : "-top-[5.5px] border-l border-t border-[var(--line-strong)]",
+      ]}
+    ></span>
+
+    <div class="px-2.5 pb-1 pt-1 font-mono text-[10px] font-medium uppercase tracking-wider text-[var(--muted)]">
+      <span data-lang-view="en">Choose language</span>
+      <span data-lang-view="id">Pilih bahasa</span>
+    </div>
+
+    <div class="space-y-0.5">
+      <a
+        role="menuitem"
+        href={PDF_FILES.en.href}
+        download={PDF_FILES.en.filename}
+        data-pdf-popover-choice
+        class="group flex items-center justify-between gap-2.5 rounded-lg px-2.5 py-2 text-[13px] text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+      >
+        <span class="flex items-center gap-2">
+          <span class="inline-flex h-5 w-6 items-center justify-center rounded border border-[var(--line-strong)] bg-[var(--bg)] font-mono text-[10px] font-medium text-[var(--muted)] group-hover:text-[var(--ink)]">
+            EN
+          </span>
+          <span class="font-medium">{UI_COPY.en.downloadModal.englishLabel}</span>
+        </span>
+        <Icon
+          name="download"
+          class="size-3.5 text-[var(--muted)] transition-transform duration-150 ease-out group-hover:translate-y-0.5 group-hover:text-[var(--ink)]"
+        />
+      </a>
+
+      <a
+        role="menuitem"
+        href={PDF_FILES.id.href}
+        download={PDF_FILES.id.filename}
+        data-pdf-popover-choice
+        class="group flex items-center justify-between gap-2.5 rounded-lg px-2.5 py-2 text-[13px] text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+      >
+        <span class="flex items-center gap-2">
+          <span class="inline-flex h-5 w-6 items-center justify-center rounded border border-[var(--line-strong)] bg-[var(--bg)] font-mono text-[10px] font-medium text-[var(--muted)] group-hover:text-[var(--ink)]">
+            ID
+          </span>
+          <span class="font-medium">{UI_COPY.en.downloadModal.indonesianLabel}</span>
+        </span>
+        <Icon
+          name="download"
+          class="size-3.5 text-[var(--muted)] transition-transform duration-150 ease-out group-hover:translate-y-0.5 group-hover:text-[var(--ink)]"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const roots = Array.from(document.querySelectorAll<HTMLElement>("[data-pdf-popover-root]"));
+  const controllers: Array<{ root: HTMLElement; close: () => void }> = [];
+
+  roots.forEach((root) => {
+    const trigger = root.querySelector<HTMLButtonElement>("[data-pdf-popover-trigger]");
+    const panel = root.querySelector<HTMLElement>("[data-pdf-popover-panel]");
+    const choices = Array.from(root.querySelectorAll<HTMLAnchorElement>("[data-pdf-popover-choice]"));
+
+    if (!trigger || !panel) return;
+
+    let closeTimer: number | null = null;
+
+    const close = () => {
+      if (panel.hidden) return;
+      panel.classList.remove("is-open");
+      trigger.setAttribute("aria-expanded", "false");
+      closeTimer = window.setTimeout(() => {
+        panel.hidden = true;
+        closeTimer = null;
+      }, 140);
+    };
+
+    const open = () => {
+      controllers.forEach((ctrl) => {
+        if (ctrl.root !== root) ctrl.close();
+      });
+      if (closeTimer !== null) {
+        clearTimeout(closeTimer);
+        closeTimer = null;
+      }
+      panel.hidden = false;
+      trigger.setAttribute("aria-expanded", "true");
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => panel.classList.add("is-open"));
+      });
+    };
+
+    controllers.push({ root, close });
+
+    trigger.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (panel.hidden || !panel.classList.contains("is-open")) {
+        open();
+      } else {
+        close();
+      }
+    });
+
+    choices.forEach((choice) => {
+      choice.addEventListener("click", () => {
+        window.setTimeout(close, 100);
+      });
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target as Node | null;
+    controllers.forEach((ctrl) => {
+      if (target && !ctrl.root.contains(target)) {
+        ctrl.close();
+      }
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      controllers.forEach((ctrl) => ctrl.close());
+    }
+  });
+</script>

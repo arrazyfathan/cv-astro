@@ -1,6 +1,6 @@
 ---
 import Section from "./Section.astro";
-import type { ResumeData } from "@/data/resume";
+import { UI_COPY, type ResumeData } from "@/data/resume";
 
 interface Props {
   skills: ResumeData["skills"];
@@ -9,20 +9,38 @@ interface Props {
 const { skills } = Astro.props;
 
 const groups = [
-  { label: "Languages", items: skills.programmingLanguages },
-  { label: "Mobile", items: skills.mobile },
-  { label: "Tools", items: skills.toolbox },
+  {
+    labelEn: UI_COPY.en.skillGroups.languages,
+    labelId: UI_COPY.id.skillGroups.languages,
+    items: skills.programmingLanguages,
+  },
+  {
+    labelEn: UI_COPY.en.skillGroups.mobile,
+    labelId: UI_COPY.id.skillGroups.mobile,
+    items: skills.mobile,
+  },
+  {
+    labelEn: UI_COPY.en.skillGroups.tools,
+    labelId: UI_COPY.id.skillGroups.tools,
+    items: skills.toolbox,
+  },
 ];
 ---
 
-<Section title="Skills" id="skills-section" delay="200ms">
+<Section
+  title={UI_COPY.en.sections.skills}
+  titleId={UI_COPY.id.sections.skills}
+  id="skills-section"
+  delay="200ms"
+>
   <div class="space-y-4 print:space-y-2" aria-labelledby="skills-section">
     {groups.map((group) => (
       <div class="cv-avoid-break grid grid-cols-1 gap-y-2 sm:grid-cols-[116px_1fr] sm:items-start sm:gap-x-5 print:grid-cols-[96px_1fr] print:gap-x-4">
         <h3 class="font-mono text-[12px] font-medium text-[var(--muted)] sm:pt-1 print:pt-0.5 print:text-[10px]">
-          {group.label}
+          <span data-lang-view="en">{group.labelEn}</span>
+          <span data-lang-view="id">{group.labelId}</span>
         </h3>
-        <ul class="flex flex-wrap gap-1.5 print:gap-1" aria-label={`${group.label} skills`}>
+        <ul class="flex flex-wrap gap-1.5 print:gap-1" aria-label={`${group.labelEn} skills`}>
           {group.items.map((skill) => (
             <li class="rounded-md border border-[var(--line)] bg-[var(--sunken)] px-2.5 py-0.5 text-[12.5px] font-medium text-[var(--ink-2)] transition-colors hover:border-[var(--line-strong)] hover:text-[var(--ink)] print:px-1.5 print:py-0 print:text-[9.5px]">
               {skill}

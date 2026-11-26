@@ -1,5 +1,7 @@
 ---
+import DownloadPdfPopover from "./DownloadPdfPopover.astro";
 import Icon from "./Icon.astro";
+import { PDF_FILES, UI_COPY } from "@/data/resume";
 
 interface CommandLink {
   title: string;
@@ -21,20 +23,7 @@ const { name, location, email, links } = Astro.props;
     <span>{name} · {location}</span>
 
     <div class="flex items-center gap-3">
-      <a
-        href="/CV%20-%20Ar%20Razy%20Fathan%20Rabbani.pdf"
-        download="CV - Ar Razy Fathan Rabbani.pdf"
-        class="group inline-flex items-center gap-1 transition-colors hover:text-[var(--ink)]"
-        aria-label="Download resume as PDF"
-      >
-        <span class="underline decoration-[var(--line-strong)] underline-offset-[4px] transition-colors group-hover:decoration-[var(--ink)]">
-          Download PDF
-        </span>
-        <Icon
-          name="arrow-up-right"
-          class="size-3 text-[var(--quiet)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--ink)]"
-        />
-      </a>
+      <DownloadPdfPopover placement="top" size="xs" />
       <span aria-hidden="true" class="text-[var(--quiet)]">·</span>
       <button
         type="button"
@@ -45,7 +34,7 @@ const { name, location, email, links } = Astro.props;
         class="inline-flex cursor-pointer items-center gap-1.5 transition-colors hover:text-[var(--ink)]"
       >
         <Icon name="command" class="size-3" />
-        <span>Menu</span>
+        <span>{UI_COPY.en.menu.button}</span>
         <kbd
           data-command-shortcut
           class="rounded border border-[var(--line-strong)] bg-[var(--sunken)] px-1.5 py-0.5 text-[10.5px] font-medium text-[var(--ink-2)]"
@@ -74,7 +63,9 @@ const { name, location, email, links } = Astro.props;
         <Icon name="search" class="mr-2.5 size-4 shrink-0 text-[var(--muted)]" />
         <input
           class="h-12 w-full bg-transparent text-sm text-[var(--ink)] outline-none placeholder:text-[var(--muted)]"
-          placeholder="Search actions or links..."
+          placeholder={UI_COPY.en.menu.searchPlaceholder}
+          data-placeholder-en={UI_COPY.en.menu.searchPlaceholder}
+          data-placeholder-id={UI_COPY.id.menu.searchPlaceholder}
           autocomplete="off"
           data-command-search
         />
@@ -91,56 +82,85 @@ const { name, location, email, links } = Astro.props;
       <div class="max-h-[380px] overflow-y-auto p-2">
         <div data-group-actions>
           <div class="px-2.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--muted)]">
-            Actions
+            <span data-lang-view="en">{UI_COPY.en.menu.actions}</span>
+            <span data-lang-view="id">{UI_COPY.id.menu.actions}</span>
           </div>
-          <button
-            type="button"
-            data-command-item
-            data-command-title="print save as pdf"
-            data-action-print
-            class="flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
-          >
-            <Icon name="printer" class="size-4 text-[var(--muted)]" />
-            <span>Print / Save as PDF</span>
-          </button>
           <a
-            href="/CV%20-%20Ar%20Razy%20Fathan%20Rabbani.pdf"
-            download="CV - Ar Razy Fathan Rabbani.pdf"
+            href={PDF_FILES.en.href}
+            download={PDF_FILES.en.filename}
             data-command-item
-            data-command-title="download pdf resume"
+            data-command-title="download unduh pdf resume english en"
             data-action-download
             class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
           >
             <Icon name="download" class="size-4 text-[var(--muted)]" />
-            <span>Download PDF</span>
+            <span data-lang-view="en">{UI_COPY.en.menu.downloadEn}</span>
+            <span data-lang-view="id">{UI_COPY.id.menu.downloadEn}</span>
           </a>
+          <a
+            href={PDF_FILES.id.href}
+            download={PDF_FILES.id.filename}
+            data-command-item
+            data-command-title="download unduh pdf resume bahasa indonesia id"
+            data-action-download
+            class="flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+          >
+            <Icon name="download" class="size-4 text-[var(--muted)]" />
+            <span data-lang-view="en">{UI_COPY.en.menu.downloadId}</span>
+            <span data-lang-view="id">{UI_COPY.id.menu.downloadId}</span>
+          </a>
+          <button
+            type="button"
+            data-command-item
+            data-command-title="print cetak save simpan pdf"
+            data-action-print
+            class="flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+          >
+            <Icon name="printer" class="size-4 text-[var(--muted)]" />
+            <span data-lang-view="en">{UI_COPY.en.menu.print}</span>
+            <span data-lang-view="id">{UI_COPY.id.menu.print}</span>
+          </button>
           {email && (
             <button
               type="button"
               data-command-item
-              data-command-title={`copy email ${email}`}
+              data-command-title={`copy salin email ${email}`}
               data-action-copy
               class="flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
             >
               <Icon name="copy" class="size-4 text-[var(--muted)]" />
-              <span>Copy email ({email})</span>
+              <span data-lang-view="en">{UI_COPY.en.menu.copyEmail} ({email})</span>
+              <span data-lang-view="id">{UI_COPY.id.menu.copyEmail} ({email})</span>
             </button>
           )}
           <button
             type="button"
             data-command-item
-            data-command-title="toggle light dark paper theme"
+            data-command-title="switch ganti language bahasa indonesia english en id"
+            data-action-language
+            class="flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
+          >
+            <Icon name="globe" class="size-4 text-[var(--muted)]" />
+            <span data-lang-view="en">{UI_COPY.en.menu.toggleLanguage}</span>
+            <span data-lang-view="id">{UI_COPY.id.menu.toggleLanguage}</span>
+          </button>
+          <button
+            type="button"
+            data-command-item
+            data-command-title="toggle ganti light dark terang gelap theme tema"
             data-action-theme
             class="flex w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-sm text-[var(--ink)] transition-colors hover:bg-[var(--sunken)]"
           >
             <Icon name="moon" class="size-4 text-[var(--muted)]" />
-            <span>Toggle light / dark paper</span>
+            <span data-lang-view="en">{UI_COPY.en.menu.toggleTheme}</span>
+            <span data-lang-view="id">{UI_COPY.id.menu.toggleTheme}</span>
           </button>
         </div>
 
         <div class="mt-2 border-t border-[var(--line)] pt-2" data-group-links>
           <div class="px-2.5 py-1.5 font-mono text-[11px] font-medium uppercase tracking-wider text-[var(--muted)]">
-            Links
+            <span data-lang-view="en">{UI_COPY.en.menu.links}</span>
+            <span data-lang-view="id">{UI_COPY.id.menu.links}</span>
           </div>
           {links.map((link) => (
             <a
@@ -158,7 +178,8 @@ const { name, location, email, links } = Astro.props;
         </div>
 
         <p class="px-2 py-6 text-center text-sm text-[var(--muted)]" hidden data-command-empty>
-          No results found.
+          <span data-lang-view="en">{UI_COPY.en.menu.empty}</span>
+          <span data-lang-view="id">{UI_COPY.id.menu.empty}</span>
         </p>
       </div>
     </div>
@@ -178,8 +199,9 @@ const { name, location, email, links } = Astro.props;
     const shortcutEl = menu.querySelector<HTMLElement>("[data-command-shortcut]");
     const items = Array.from(menu.querySelectorAll<HTMLElement>("[data-command-item]"));
     const actionPrint = menu.querySelector<HTMLButtonElement>("[data-action-print]");
-    const actionDownload = menu.querySelector<HTMLAnchorElement>("[data-action-download]");
+    const actionDownloads = Array.from(menu.querySelectorAll<HTMLAnchorElement>("[data-action-download]"));
     const actionCopy = menu.querySelector<HTMLButtonElement>("[data-action-copy]");
+    const actionLanguage = menu.querySelector<HTMLButtonElement>("[data-action-language]");
     const actionTheme = menu.querySelector<HTMLButtonElement>("[data-action-theme]");
     const email = menu.dataset.email ?? "";
 
@@ -187,6 +209,15 @@ const { name, location, email, links } = Astro.props;
 
     const isMac = window.navigator.userAgent.includes("Mac");
     if (shortcutEl) shortcutEl.textContent = isMac ? "⌘J" : "Ctrl+J";
+
+    const syncSearchPlaceholder = () => {
+      const isId = document.documentElement.dataset.lang === "id";
+      searchInput.placeholder =
+        (isId ? searchInput.dataset.placeholderId : searchInput.dataset.placeholderEn) ?? "";
+    };
+
+    syncSearchPlaceholder();
+    window.addEventListener("cv:lang-sync", syncSearchPlaceholder);
 
     let closeTimer: number | null = null;
 
@@ -212,6 +243,7 @@ const { name, location, email, links } = Astro.props;
       overlay.hidden = false;
       trigger.setAttribute("aria-expanded", "true");
       searchInput.value = "";
+      syncSearchPlaceholder();
       filterItems();
       requestAnimationFrame(() => {
         requestAnimationFrame(() => overlay.classList.add("is-open"));
@@ -245,13 +277,20 @@ const { name, location, email, links } = Astro.props;
       window.setTimeout(() => window.print(), 120);
     });
 
-    actionDownload?.addEventListener("click", () => {
-      closeMenu();
+    actionDownloads.forEach((link) => {
+      link.addEventListener("click", () => {
+        closeMenu();
+      });
     });
 
     actionCopy?.addEventListener("click", () => {
       closeMenu();
       if (email) navigator.clipboard?.writeText(email);
+    });
+
+    actionLanguage?.addEventListener("click", () => {
+      closeMenu();
+      window.dispatchEvent(new CustomEvent("cv:lang-toggle"));
     });
 
     actionTheme?.addEventListener("click", () => {

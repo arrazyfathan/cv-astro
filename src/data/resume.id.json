@@ -1,0 +1,219 @@
+{
+  "name": "Ar Razy Fathan Rabbani",
+  "initials": "AR",
+  "location": "Surakarta, Indonesia",
+  "locationLink": "https://www.google.com/maps/place/Surakarta",
+  "about": "Mobile Engineer · Android & iOS",
+  "availability": "Terbuka untuk peran mobile engineering & kolaborasi",
+  "description": "Mobile Engineer di Surakarta, Indonesia — 4+ tahun mengembangkan aplikasi Android dan iOS dengan Kotlin, Jetpack Compose, Flutter, dan KMP.",
+  "ogDescription": "CV Ar Razy Fathan Rabbani — Mobile Engineer yang membangun aplikasi Android & iOS dengan Kotlin, Jetpack Compose, dan Flutter.",
+  "summary": "Mobile Engineer dengan pengalaman lebih dari 4 tahun dalam membangun dan merilis aplikasi Android dan iOS yang andal. Berpengalaman dalam pengembangan Android native modern menggunakan Kotlin, Java, dan Jetpack Compose, serta pengembangan lintas platform dengan Kotlin Multiplatform (KMP) dan Flutter. Terbiasa menangani pengembangan fitur secara end-to-end baik secara mandiri maupun berkolaborasi erat dengan tim desain dan backend.",
+  "avatarUrl": "/profile-image.jpg",
+  "personalWebsiteUrl": "https://arrazyfathan.com",
+  "contact": {
+    "email": "hello@arrazyfathan.com",
+    "tel": null,
+    "social": [
+      {
+        "name": "GitHub",
+        "handle": "arrazyfathan",
+        "url": "https://github.com/arrazyfathan",
+        "icon": "github"
+      },
+      {
+        "name": "LinkedIn",
+        "handle": "in/arrazyfathan",
+        "url": "https://www.linkedin.com/in/arrazyfathan/",
+        "icon": "linkedin"
+      }
+    ]
+  },
+  "education": [
+    {
+      "school": "Universitas Islam Indonesia",
+      "degree": "Sarjana Ilmu Komputer",
+      "gpa": "3.68 / 4.00",
+      "start": "2017",
+      "end": "2021"
+    }
+  ],
+  "work": [
+    {
+      "company": "Gamatechno Indonesia",
+      "link": "https://www.gamatechno.com/",
+      "location": "Remote",
+      "badges": ["Android", "Kotlin", "Java", "Flutter"],
+      "title": "Mobile Engineer",
+      "start": "2022",
+      "end": null,
+      "description": {
+        "paragraph": "Android Engineer di divisi Digital Solutions, membangun aplikasi mobile berbasis produk maupun proyek — dengan fokus utama pada aplikasi sektor publik dan enterprise yang mendorong produktivitas operasional.",
+        "bullets": [
+          "Berkolaborasi dengan tim engineering lintas fungsi untuk merancang arsitektur dan merilis aplikasi Android dengan fokus pada performa mulus serta pengalaman pengguna yang andal.",
+          "Mengembangkan dan memelihara fitur baru, peningkatan arsitektur, serta perbaikan bug di produksi sesuai kebutuhan produk yang terus berkembang.",
+          "Bekerja sama erat dengan desainer UI/UX untuk menerjemahkan alur kerja yang kompleks menjadi antarmuka mobile yang bersih dan intuitif.",
+          "Mengevaluasi dan mengadopsi tooling serta pola arsitektur Android modern pada berbagai proyek klien maupun internal."
+        ]
+      }
+    },
+    {
+      "company": "Freelance",
+      "link": "",
+      "location": "Remote",
+      "badges": ["Android", "Flutter", "iOS"],
+      "title": "Mobile Developer",
+      "start": "2024",
+      "end": null,
+      "description": {
+        "paragraph": "Mobile engineer independen yang bermitra langsung dengan klien untuk merancang, membangun, dan memelihara aplikasi Android serta lintas platform yang skalabel sesuai tujuan bisnis.",
+        "bullets": [
+          "Merancang dan mengimplementasikan aplikasi mobile secara end-to-end dengan perhatian tinggi pada performa runtime, ketahanan offline, dan detail antarmuka.",
+          "Mengirimkan fitur secara iteratif, penyempurnaan aplikasi, dan pemeliharaan berkelanjutan sesuai target serta milestone klien.",
+          "Berkomunikasi langsung dengan stakeholder untuk mengubah kebutuhan bisnis yang masih terbuka menjadi produk mobile siap rilis."
+        ]
+      }
+    }
+  ],
+  "skills": {
+    "programmingLanguages": ["Kotlin", "Java", "Dart", "TypeScript", "JavaScript"],
+    "mobile": [
+      "Android Native",
+      "Jetpack Compose",
+      "Kotlin Multiplatform (KMP)",
+      "Compose Multiplatform",
+      "Flutter",
+      "Android Jetpack",
+      "XML",
+      "Coroutines",
+      "Clean Architecture",
+      "MVVM",
+      "MVI",
+      "MVP",
+      "CI/CD"
+    ],
+    "toolbox": [
+      "Android Studio",
+      "IntelliJ IDEA",
+      "Xcode",
+      "VS Code",
+      "Zed",
+      "Firebase",
+      "Gradle",
+      "Git",
+      "GitLab CI/CD",
+      "Jenkins",
+      "Postman",
+      "Figma"
+    ]
+  },
+  "projects": [
+    {
+      "title": "Obscurenv",
+      "techStack": ["Go", "PostgreSQL", "Cobra CLI", "AES-256-GCM", "Argon2id", "Docker Compose"],
+      "description": "Layanan penyimpanan file .env terenkripsi zero-knowledge yang dapat di-host mandiri (self-hosted), dilengkapi REST API Go dan CLI dengan proses enkripsi serta dekripsi sepenuhnya di sisi lokal.",
+      "link": {
+        "label": "GitHub",
+        "href": "https://github.com/arrazyfathan/obscurenv"
+      }
+    },
+    {
+      "title": "Obscurenv Web",
+      "techStack": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Web Crypto", "Vitest"],
+      "description": "Dashboard web self-hosted untuk mengelola proyek Obscurenv dan file .env terenkripsi, dilengkapi dekripsi lokal di browser serta autentikasi passkey.",
+      "link": {
+        "label": "GitHub",
+        "href": "https://github.com/arrazyfathan/obscurenv-web"
+      }
+    },
+    {
+      "title": "KBBI Multiplatform",
+      "techStack": ["Kotlin Multiplatform", "Compose Multiplatform", "Material 3", "Koin", "Ktor", "Room"],
+      "description": "Aplikasi kamus bahasa Indonesia lintas platform untuk Android, iOS, web, dan desktop dengan fitur pencarian, detail kata, bookmark, dan riwayat pencarian.",
+      "link": {
+        "label": "GitHub",
+        "href": "https://github.com/arrazyfathan/kbbi-kmp"
+      }
+    },
+    {
+      "title": "KBBI",
+      "techStack": ["Android", "Kotlin"],
+      "description": "Aplikasi kamus Android untuk mencari kosakata bahasa Indonesia dan menjelajahi definisi KBBI.",
+      "link": {
+        "label": "GitHub",
+        "href": "https://github.com/arrazyfathan/kbbi"
+      }
+    },
+    {
+      "title": "Astro CV",
+      "techStack": ["Astro", "TypeScript", "Tailwind CSS", "Cloudflare Workers"],
+      "description": "Situs CV cepat dan ramah cetak yang dibangun dengan Astro, digerakkan oleh model data JSON bertipe statis dengan pembuatan PDF otomatis.",
+      "link": {
+        "label": "GitHub",
+        "href": "https://github.com/arrazyfathan/cv-astro"
+      }
+    },
+    {
+      "title": "JakLingko App",
+      "techStack": ["Android Native", "Kotlin & Java", "NFC", "Google Maps SDK", "Room", "Coroutines", "Firebase", "MVVM"],
+      "description": "Aplikasi integrasi transportasi publik yang menyatukan pembelian tiket, pembayaran kartu NFC, dan rute transit antarmoda di seluruh Jakarta.",
+      "link": {
+        "label": "Play Store",
+        "href": "https://play.google.com/store/apps/details?id=com.jaklingkoindonesia.app&pcampaignid=web_share"
+      }
+    },
+    {
+      "title": "HiiGeek",
+      "techStack": ["Flutter", "Dart", "Bloc", "Firebase", "Android", "iOS"],
+      "description": "Aplikasi mobile resmi untuk GIK UGM — ruang kreatif yang menghubungkan mahasiswa, dosen, praktisi industri, seniman, dan sektor publik.",
+      "link": {
+        "label": "Play Store",
+        "href": "https://play.google.com/store/apps/details?id=id.hiigeek&pcampaignid=web_share"
+      }
+    },
+    {
+      "title": "Kosmo Kominfo",
+      "techStack": ["Android Native", "Kotlin", "RxJava", "ML Kit", "Firebase", "MVP"],
+      "description": "Aplikasi pendamping produktivitas yang dibangun untuk jajaran Kementerian Komunikasi dan Informatika Republik Indonesia.",
+      "link": {
+        "label": "Play Store",
+        "href": "https://play.google.com/store/apps/details?id=com.kosmokominfo&pcampaignid=web_share"
+      }
+    },
+    {
+      "title": "Lerun",
+      "techStack": ["Android Native", "Kotlin", "Google Maps", "Dagger Hilt", "Room", "Coroutines", "Firebase", "MVVM"],
+      "description": "Aplikasi pelacak lari open-source dengan arsitektur Android modern, pemetaan rute langsung, dan riwayat lari offline.",
+      "link": {
+        "label": "GitHub",
+        "href": "https://github.com/arrazyfathan/Lerun"
+      }
+    },
+    {
+      "title": "Panic Button",
+      "techStack": ["Android Native", "Kotlin", "Google Maps", "Coroutines", "Firebase", "MVI"],
+      "description": "Aplikasi tanggap darurat yang memungkinkan petugas lapangan mengirim sinyal SOS instan lengkap dengan koordinat GPS langsung, teks, dan video.",
+      "link": {
+        "label": "Internal",
+        "href": ""
+      }
+    },
+    {
+      "title": "Notes Agent (Voice to Text)",
+      "techStack": ["Android Native", "Kotlin", "Firebase", "MVI"],
+      "description": "Aplikasi catatan lapangan berbasis suara ke teks yang membantu petugas merekam dan mentranskrip observasi secara real-time maupun dari rekaman.",
+      "link": {
+        "label": "Internal",
+        "href": ""
+      }
+    },
+    {
+      "title": "BeVoucher — Berau Coal HSE Automation",
+      "techStack": ["Android Native", "Java", "Room", "Firebase", "MVP"],
+      "description": "Modul reward dan voucher pada rangkaian otomasi HSE Berau Coal untuk mendorong pelaporan keselamatan kerja dan keterlibatan karyawan.",
+      "link": {
+        "label": "Internal",
+        "href": ""
+      }
+    }
+  ]
+}

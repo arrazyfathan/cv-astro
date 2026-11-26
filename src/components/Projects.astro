@@ -1,18 +1,25 @@
 ---
 import Icon from "./Icon.astro";
 import Section from "./Section.astro";
-import type { ResumeData } from "@/data/resume";
+import { UI_COPY, type ResumeData } from "@/data/resume";
 
 interface Props {
   projects: ResumeData["projects"];
+  projectsId: ResumeData["projects"];
 }
 
-const { projects } = Astro.props;
+const { projects, projectsId } = Astro.props;
 ---
 
-<Section title="Selected Projects" id="selected-projects" delay="150ms">
+<Section
+  title={UI_COPY.en.sections.projects}
+  titleId={UI_COPY.id.sections.projects}
+  id="selected-projects"
+  delay="150ms"
+>
   <div aria-labelledby="selected-projects">
-    {projects.map((project) => {
+    {projects.map((project, idx) => {
+      const localized = projectsId[idx] ?? project;
       const href = project.link?.href;
       const label = project.link?.label;
       return (
@@ -56,8 +63,9 @@ const { projects } = Astro.props;
             )}
           </div>
 
-          <p class="mt-1.5 text-pretty text-[14px] leading-[1.62] text-[var(--ink-2)] print:mt-0.5 print:text-[10.5px] print:leading-[1.45]">
-            {project.description}
+          <p class="mt-1.5 text-pretty text-[14.5px] leading-[1.65] text-[var(--ink-2)] print:mt-0.5 print:text-[10.5px] print:leading-[1.45]">
+            <span data-lang-view="en">{project.description}</span>
+            <span data-lang-view="id">{localized.description}</span>
           </p>
 
           {project.techStack.length > 0 && (

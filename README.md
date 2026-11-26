@@ -237,7 +237,7 @@ The resume has a dedicated PDF export generated from `src/data/resume.json`:
 
 - Print-specific Tailwind classes reduce spacing.
 - The command menu and shortcut hint are hidden during print.
-- `scripts/generate-resume-pdf.mjs` creates `public/CV - Ar Razy Fathan Rabbani.pdf` during `npm run dev` and `npm run build`.
+- `scripts/generate-resume-pdf.mjs` creates `public/CV - Ar Razy Fathan Rabbani.pdf` (EN) and `public/CV - Ar Razy Fathan Rabbani (ID).pdf` (ID) during `npm run dev` and `npm run build`.
 - The command menu includes a direct `Download PDF` action and does not open the browser print dialog.
 
 Use Poppler and `pypdf` to render and inspect the generated pages after large content updates.

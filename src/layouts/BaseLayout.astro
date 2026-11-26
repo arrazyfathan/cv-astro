@@ -61,17 +61,17 @@ const shouldLoadAnalytics = import.meta.env.PROD;
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-icon.png" sizes="180x180" />
 
-    <!-- Shared arrazyfathan.com Typography (Gabarito, Geist, Newsreader italic, Geist Mono) -->
+    <!-- Shared arrazyfathan.com Typography (Gabarito, Geist, Geist Mono) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@600;700;800&family=Geist+Mono:wght@400;500&family=Geist:wght@400;500;600&display=swap"
     />
 
     <title>{title}</title>
 
-    <!-- Prevent theme flash on navigation/reload (defaults to Light warm paper) -->
+    <!-- Prevent theme & language flash on navigation/reload -->
     <script is:inline>
       (function () {
         try {
@@ -82,6 +82,14 @@ const shouldLoadAnalytics = import.meta.env.PROD;
             document.documentElement.classList.remove("dark");
           }
         } catch (e) {}
+        try {
+          var savedLang = localStorage.getItem("cv-lang");
+          var lang = savedLang === "id" ? "id" : "en";
+          document.documentElement.dataset.lang = lang;
+          document.documentElement.lang = lang;
+        } catch (e) {
+          document.documentElement.dataset.lang = "en";
+        }
       })();
     </script>
 

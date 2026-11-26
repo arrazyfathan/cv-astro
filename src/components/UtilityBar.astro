@@ -1,5 +1,7 @@
 ---
+import DownloadPdfPopover from "./DownloadPdfPopover.astro";
 import Icon from "./Icon.astro";
+import { UI_COPY } from "@/data/resume";
 
 interface Props {
   websiteUrl: string;
@@ -10,7 +12,10 @@ const { websiteUrl } = Astro.props;
 
 <nav
   aria-label="Resume utilities"
-  class="mb-10 flex items-center justify-between gap-4 border-b border-[var(--line)] pb-4 print:hidden"
+  data-utility-bar
+  data-title-en={UI_COPY.en.pageTitle}
+  data-title-id={UI_COPY.id.pageTitle}
+  class="mb-10 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-b border-[var(--line)] pb-4 print:hidden"
 >
   <a
     href={websiteUrl}
@@ -23,46 +28,68 @@ const { websiteUrl } = Astro.props;
     <span>arrazyfathan.com</span>
   </a>
 
-  <div class="flex items-center gap-4">
-    <a
-      href="/CV%20-%20Ar%20Razy%20Fathan%20Rabbani.pdf"
-      download="CV - Ar Razy Fathan Rabbani.pdf"
-      class="group inline-flex items-center gap-1 font-mono text-[12.5px] text-[var(--ink-2)] transition-colors hover:text-[var(--ink)]"
-      aria-label="Download resume as PDF"
-    >
-      <span class="underline decoration-[var(--line-strong)] underline-offset-[5px] transition-colors group-hover:decoration-[var(--ink)]">
-        Download PDF
-      </span>
-      <Icon
-        name="arrow-up-right"
-        class="size-3.5 text-[var(--quiet)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--ink)]"
-      />
-    </a>
+  <div class="flex items-center gap-3.5 sm:gap-4">
+    <DownloadPdfPopover placement="bottom" size="sm" />
 
-    <button
-      type="button"
-      data-theme-toggle
-      class="cv-press inline-flex size-8 cursor-pointer items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--ink)]"
-      aria-label="Switch to dark mode"
-      title="Dark mode (D)"
-    >
-      <span data-theme-icon-moon class="inline-flex">
-        <Icon name="moon" class="size-3.5" />
-      </span>
-      <span data-theme-icon-sun class="hidden">
-        <Icon name="sun" class="size-3.5" />
-      </span>
-    </button>
+    <div class="flex items-center gap-2">
+      <div
+        role="group"
+        aria-label="Language"
+        class="inline-flex h-8 items-center rounded-full border border-[var(--line)] bg-[var(--surface)] p-0.5 font-mono text-[11px] font-medium"
+      >
+        <button
+          type="button"
+          data-lang-option="en"
+          aria-pressed="true"
+          class="cv-press inline-flex h-full cursor-pointer items-center rounded-full px-2 text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
+          title="English"
+        >
+          EN
+        </button>
+        <button
+          type="button"
+          data-lang-option="id"
+          aria-pressed="false"
+          class="cv-press inline-flex h-full cursor-pointer items-center rounded-full px-2 text-[var(--muted)] transition-colors hover:text-[var(--ink)]"
+          title="Bahasa Indonesia"
+        >
+          ID
+        </button>
+      </div>
+
+      <button
+        type="button"
+        data-theme-toggle
+        class="cv-press inline-flex size-8 cursor-pointer items-center justify-center rounded-full border border-[var(--line)] bg-[var(--surface)] text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--ink)]"
+        aria-label="Switch to dark mode"
+        title="Dark mode (D)"
+      >
+        <span data-theme-icon-moon class="inline-flex">
+          <Icon name="moon" class="size-3.5" />
+        </span>
+        <span data-theme-icon-sun class="hidden">
+          <Icon name="sun" class="size-3.5" />
+        </span>
+      </button>
+    </div>
   </div>
 </nav>
 
 <script>
+  const nav = document.querySelector<HTMLElement>("[data-utility-bar]");
+  const titleEn = nav?.dataset.titleEn ?? document.title;
+  const titleId = nav?.dataset.titleId ?? document.title;
   const themeBtn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
   const moonIcon = themeBtn?.querySelector<HTMLElement>("[data-theme-icon-moon]");
   const sunIcon = themeBtn?.querySelector<HTMLElement>("[data-theme-icon-sun]");
+  const langButtons = Array.from(document.querySelectorAll<HTMLButtonElement>("[data-lang-option]"));
+
+  const getCurrentLang = (): "en" | "id" =>
+    document.documentElement.dataset.lang === "id" ? "id" : "en";
 
   const syncThemeUI = () => {
     const isDark = document.documentElement.classList.contains("dark");
+    const isId = getCurrentLang() === "id";
     if (moonIcon && sunIcon) {
       moonIcon.classList.toggle("hidden", isDark);
       moonIcon.classList.toggle("inline-flex", !isDark);
@@ -70,9 +97,39 @@ const { websiteUrl } = Astro.props;
       sunIcon.classList.toggle("inline-flex", isDark);
     }
     if (themeBtn) {
-      themeBtn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
-      themeBtn.setAttribute("title", isDark ? "Light mode (D)" : "Dark mode (D)");
+      if (isId) {
+        themeBtn.setAttribute("aria-label", isDark ? "Ganti ke mode terang" : "Ganti ke mode gelap");
+        themeBtn.setAttribute("title", isDark ? "Mode terang (D)" : "Mode gelap (D)");
+      } else {
+        themeBtn.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+        themeBtn.setAttribute("title", isDark ? "Light mode (D)" : "Dark mode (D)");
+      }
     }
+  };
+
+  const syncLangUI = (lang: "en" | "id") => {
+    const nextLang = lang === "id" ? "id" : "en";
+    document.documentElement.dataset.lang = nextLang;
+    document.documentElement.lang = nextLang;
+    document.title = nextLang === "id" ? titleId : titleEn;
+
+    langButtons.forEach((btn) => {
+      const isSelected = btn.getAttribute("data-lang-option") === nextLang;
+      btn.setAttribute("aria-pressed", String(isSelected));
+    });
+
+    syncThemeUI();
+  };
+
+  const setLang = (lang: "en" | "id") => {
+    const nextLang = lang === "id" ? "id" : "en";
+    try {
+      localStorage.setItem("cv-lang", nextLang);
+    } catch {
+      // Ignore storage errors in restricted contexts.
+    }
+    syncLangUI(nextLang);
+    window.dispatchEvent(new CustomEvent("cv:lang-sync", { detail: { lang: nextLang } }));
   };
 
   const toggleTheme = () => {
@@ -85,11 +142,25 @@ const { websiteUrl } = Astro.props;
     syncThemeUI();
   };
 
-  syncThemeUI();
+  syncLangUI(getCurrentLang());
+
+  langButtons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const option = btn.getAttribute("data-lang-option");
+      if (option === "en" || option === "id") setLang(option);
+    });
+  });
 
   themeBtn?.addEventListener("click", toggleTheme);
 
   window.addEventListener("cv:theme-sync", syncThemeUI);
+  window.addEventListener("cv:lang-set", (event) => {
+    const detailLang = (event as CustomEvent<{ lang?: string }>).detail?.lang;
+    setLang(detailLang === "id" ? "id" : "en");
+  });
+  window.addEventListener("cv:lang-toggle", () => {
+    setLang(getCurrentLang() === "id" ? "en" : "id");
+  });
 
   window.addEventListener("keydown", (e) => {
     const target = e.target as HTMLElement | null;

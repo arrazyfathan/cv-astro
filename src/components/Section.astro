@@ -1,12 +1,13 @@
 ---
 interface Props {
   title?: string;
+  titleId?: string;
   id?: string;
   delay?: string;
   class?: string;
 }
 
-const { title, id, delay = "0ms", class: className = "" } = Astro.props;
+const { title, titleId, id, delay = "0ms", class: className = "" } = Astro.props;
 ---
 
 <section
@@ -18,10 +19,17 @@ const { title, id, delay = "0ms", class: className = "" } = Astro.props;
 >
   {title && (
     <h2
-      class="font-serif text-[16px] font-normal italic text-[var(--muted)] print:text-[12.5px]"
+      class="font-display text-[20px] font-bold tracking-[-0.02em] text-[var(--ink)] sm:text-[21px] print:text-[14px]"
       id={id}
     >
-      {title}
+      {titleId ? (
+        <>
+          <span data-lang-view="en">{title}</span>
+          <span data-lang-view="id">{titleId}</span>
+        </>
+      ) : (
+        title
+      )}
     </h2>
   )}
   <slot />

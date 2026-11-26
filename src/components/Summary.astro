@@ -1,18 +1,26 @@
 ---
 import Section from "./Section.astro";
+import { UI_COPY } from "@/data/resume";
 
 interface Props {
   summary: string;
+  summaryId: string;
 }
 
-const { summary } = Astro.props;
+const { summary, summaryId } = Astro.props;
 ---
 
-<Section title="Summary" id="about-section" delay="50ms">
+<Section
+  title={UI_COPY.en.sections.summary}
+  titleId={UI_COPY.id.sections.summary}
+  id="about-section"
+  delay="50ms"
+>
   <p
-    class="text-justify text-[15px] leading-[1.72] text-[var(--ink-2)] print:text-[11px] print:leading-[1.55]"
+    class="text-pretty text-[15px] leading-[1.68] text-[var(--ink-2)] print:text-[11px] print:leading-[1.55]"
     aria-labelledby="about-section"
   >
-    {summary}
+    <span data-lang-view="en">{summary}</span>
+    <span data-lang-view="id">{summaryId}</span>
   </p>
 </Section>
