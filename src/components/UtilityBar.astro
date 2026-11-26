@@ -23,16 +23,21 @@ const { websiteUrl } = Astro.props;
     <span>arrazyfathan.com</span>
   </a>
 
-  <div class="flex items-center gap-2">
-    <button
-      type="button"
-      data-print-button
-      class="cv-press inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-[var(--line-strong)] bg-[var(--surface)] px-3 py-1.5 font-mono text-[12px] font-medium text-[var(--ink)] hover:border-[var(--ink)]/30 hover:bg-[var(--sunken)]"
-      aria-label="Print or save resume as PDF"
+  <div class="flex items-center gap-4">
+    <a
+      href="/CV%20-%20Ar%20Razy%20Fathan%20Rabbani.pdf"
+      download="CV - Ar Razy Fathan Rabbani.pdf"
+      class="group inline-flex items-center gap-1 font-mono text-[12.5px] text-[var(--ink-2)] transition-colors hover:text-[var(--ink)]"
+      aria-label="Download resume as PDF"
     >
-      <Icon name="printer" class="size-3.5 text-[var(--muted)]" />
-      <span>Print PDF</span>
-    </button>
+      <span class="underline decoration-[var(--line-strong)] underline-offset-[5px] transition-colors group-hover:decoration-[var(--ink)]">
+        Download PDF
+      </span>
+      <Icon
+        name="arrow-up-right"
+        class="size-3.5 text-[var(--quiet)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--ink)]"
+      />
+    </a>
 
     <button
       type="button"
@@ -52,7 +57,6 @@ const { websiteUrl } = Astro.props;
 </nav>
 
 <script>
-  const printBtn = document.querySelector<HTMLButtonElement>("[data-print-button]");
   const themeBtn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
   const moonIcon = themeBtn?.querySelector<HTMLElement>("[data-theme-icon-moon]");
   const sunIcon = themeBtn?.querySelector<HTMLElement>("[data-theme-icon-sun]");
@@ -83,7 +87,6 @@ const { websiteUrl } = Astro.props;
 
   syncThemeUI();
 
-  printBtn?.addEventListener("click", () => window.print());
   themeBtn?.addEventListener("click", toggleTheme);
 
   window.addEventListener("cv:theme-sync", syncThemeUI);

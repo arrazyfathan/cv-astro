@@ -21,13 +21,20 @@ const { name, location, email, links } = Astro.props;
     <span>{name} · {location}</span>
 
     <div class="flex items-center gap-3">
-      <button
-        type="button"
-        data-footer-print
-        class="cursor-pointer transition-colors hover:text-[var(--ink)]"
+      <a
+        href="/CV%20-%20Ar%20Razy%20Fathan%20Rabbani.pdf"
+        download="CV - Ar Razy Fathan Rabbani.pdf"
+        class="group inline-flex items-center gap-1 transition-colors hover:text-[var(--ink)]"
+        aria-label="Download resume as PDF"
       >
-        Print PDF
-      </button>
+        <span class="underline decoration-[var(--line-strong)] underline-offset-[4px] transition-colors group-hover:decoration-[var(--ink)]">
+          Download PDF
+        </span>
+        <Icon
+          name="arrow-up-right"
+          class="size-3 text-[var(--quiet)] transition-transform duration-200 ease-out group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[var(--ink)]"
+        />
+      </a>
       <span aria-hidden="true" class="text-[var(--quiet)]">·</span>
       <button
         type="button"
@@ -97,8 +104,8 @@ const { name, location, email, links } = Astro.props;
             <span>Print / Save as PDF</span>
           </button>
           <a
-            href="/ar-razy-fathan-rabbani-cv.pdf"
-            download="ar-razy-fathan-rabbani-cv.pdf"
+            href="/CV%20-%20Ar%20Razy%20Fathan%20Rabbani.pdf"
+            download="CV - Ar Razy Fathan Rabbani.pdf"
             data-command-item
             data-command-title="download pdf resume"
             data-action-download
@@ -163,7 +170,6 @@ const { name, location, email, links } = Astro.props;
 
   menus.forEach((menu) => {
     const trigger = menu.querySelector<HTMLButtonElement>("[data-command-trigger]");
-    const footerPrint = menu.querySelector<HTMLButtonElement>("[data-footer-print]");
     const overlay = menu.querySelector<HTMLElement>("[data-command-overlay]");
     const dialog = menu.querySelector<HTMLElement>("[data-command-dialog]");
     const closeButton = menu.querySelector<HTMLButtonElement>("[data-command-close]");
@@ -223,8 +229,6 @@ const { name, location, email, links } = Astro.props;
         closeTimer = null;
       }, 180);
     };
-
-    footerPrint?.addEventListener("click", () => window.print());
 
     trigger.addEventListener("click", () => {
       if (overlay.hidden) openMenu();
